@@ -1369,7 +1369,7 @@
         <span class="float-petal fp3"></span>
       </div>
       <div class="featured-title">isha.</div>
-      <div class="featured-meta">13 songs · ~1 hr</div>
+      <div class="featured-meta">14 songs · ~1 hr</div>
       <div class="featured-tag">♡ on repeat</div>
     </div>
 
@@ -1400,11 +1400,11 @@
       <div class="hero-info">
         <div class="hero-label">Playlist</div>
         <h1 class="hero-title">isha.</h1>
-        <p class="hero-desc">a love story told the slow way — how she walked into the room, how slowly I fell, how strong she grew, and how, somehow, we ended up here together. thirteen songs, four chapters.</p>
+        <p class="hero-desc">a love story told the slow way — how she walked into the room, how slowly I fell, how strong she grew, and how, somehow, we ended up here together. fourteen songs, four chapters.</p>
         <div class="hero-meta">
           <span class="by">j.</span>
           <span class="dot">•</span>
-          <span>13 songs,</span>
+          <span>14 songs,</span>
           <span class="muted">about an hour</span>
         </div>
       </div>
@@ -1488,27 +1488,29 @@
 
 <script>
   // ============ THE PLAYLIST — a love story in four chapters ============
+  const SONG_BASE = 'https://raw.githubusercontent.com/jiten123321/song/main/';
   const tracks = [
     // ── chapter one: when she walked in ──
-    { title: "Anjaana Anjaani (Title Song)", artist: "Nikhil D'Souza & Monali Thakur", album: "Anjaana Anjaani",       added: "1 year ago",    dur: "5:32", cv: 1,  liked: true, phase: 0 },
-    { title: "Raabta (Kehte Hain Khuda)",    artist: "Arijit Singh & Hamsika Iyer",    album: "Agent Vinod",           added: "11 months ago", dur: "4:24", cv: 2,  liked: true, phase: 0 },
-    { title: "Pehla Nasha",                  artist: "Udit Narayan & Sadhana Sargam",  album: "Jo Jeeta Wohi Sikandar",added: "10 months ago", dur: "4:52", cv: 3,  liked: true, phase: 0 },
+    { title: "Anjaana Anjaani (Title Song)", artist: "Nikhil D'Souza & Monali Thakur", album: "Anjaana Anjaani",       added: "1 year ago",    dur: "5:32", cv: 1,  liked: true, phase: 0, src: SONG_BASE + "Anjaana%20Anjaani%20Ki%20Kahani%20Vishal%20Shekhar%20128%20Kbps.mp3" },
+    { title: "Raabta (Kehte Hain Khuda)",    artist: "Arijit Singh & Hamsika Iyer",    album: "Agent Vinod",           added: "11 months ago", dur: "4:24", cv: 2,  liked: true, phase: 0, src: SONG_BASE + "Raabta%20Kehte%20Hain%20Khuda%20Ne%20Agent%20Vinod%20128%20Kbps.mp3" },
+    { title: "Pehla Nasha",                  artist: "Udit Narayan & Sadhana Sargam",  album: "Jo Jeeta Wohi Sikandar",added: "10 months ago", dur: "4:52", cv: 3,  liked: true, phase: 0, src: SONG_BASE + "Pehla%20Nasha%20Jo%20Jeeta%20Wohi%20Sikandar%20128%20Kbps.mp3" },
 
     // ── chapter two: falling, slowly ──
-    { title: "Nazm Nazm",                    artist: "Arko",                            album: "Bareilly Ki Barfi",     added: "9 months ago",  dur: "4:33", cv: 4,  liked: true, phase: 1 },
-    { title: "Tumse Hi Tumse",               artist: "Shafqat Amanat Ali & KK",         album: "Anjaana Anjaani",       added: "8 months ago",  dur: "4:30", cv: 5,  liked: true, phase: 1 },
+    { title: "Nazm Nazm",                    artist: "Arko",                            album: "Bareilly Ki Barfi",     added: "9 months ago",  dur: "4:33", cv: 4,  liked: true, phase: 1, src: SONG_BASE + "Nazm%20Nazm%20Bareilly%20Ki%20Barfi%20128%20Kbps.mp3" },
+    { title: "Tumse Hi Tumse",               artist: "Shafqat Amanat Ali & KK",         album: "Anjaana Anjaani",       added: "8 months ago",  dur: "4:30", cv: 5,  liked: true, phase: 1, src: SONG_BASE + "Tumse%20Hi%20Tumse%20Ab%20Se%20Koi%20Khushi%20Nahi%20V1%20Anjaana%20Anjaani%20128%20Kbps.mp3" },
 
     // ── chapter three: and she rose ──
-    { title: "Unstoppable",                  artist: "Sia",                             album: "This Is Acting",        added: "7 months ago",  dur: "3:38", cv: 6,  liked: true, phase: 2 },
-    { title: "Believer",                     artist: "Imagine Dragons",                 album: "Evolve",                added: "6 months ago",  dur: "3:24", cv: 7,  liked: true, phase: 2 },
-    { title: "Yun Hi Chala Chal",            artist: "Kailash Kher, Hariharan & Udit Narayan", album: "Swades",         added: "5 months ago",  dur: "6:25", cv: 8,  liked: true, phase: 2 },
-    { title: "Manja",                        artist: "Amit Trivedi & Mohan Kanan",      album: "Kai Po Che!",           added: "4 months ago",  dur: "4:42", cv: 9,  liked: true, phase: 2 },
+    { title: "Unstoppable",                  artist: "Sia",                             album: "This Is Acting",        added: "7 months ago",  dur: "3:38", cv: 6,  liked: true, phase: 2, src: SONG_BASE + "Unstoppable%20Sia%20128%20Kbps.mp3" },
+    { title: "Believer",                     artist: "Imagine Dragons",                 album: "Evolve",                added: "6 months ago",  dur: "3:24", cv: 7,  liked: true, phase: 2, src: SONG_BASE + "Imagine-Dragons-Believer-(LoadedTracks.com).mp3" },
+    { title: "Yun Hi Chala Chal",            artist: "Kailash Kher, Hariharan & Udit Narayan", album: "Swades",         added: "5 months ago",  dur: "6:25", cv: 8,  liked: true, phase: 2, src: SONG_BASE + "Yun%20Hi%20Chala%20Chal%20Swades%20128%20Kbps.mp3" },
+    { title: "Manja",                        artist: "Amit Trivedi & Mohan Kanan",      album: "Kai Po Che!",           added: "4 months ago",  dur: "4:42", cv: 9,  liked: true, phase: 2, src: SONG_BASE + "Manja%20Kai%20Po%20Che%20128%20Kbps.mp3" },
 
     // ── chapter four: happily, ever after ──
-    { title: "Raataan Lambiyan",             artist: "Jubin Nautiyal & Asees Kaur",    album: "Shershaah",              added: "3 months ago",  dur: "3:50", cv: 10, liked: true, phase: 3 },
-    { title: "Tumhi Ho Bandhu",              artist: "Neeraj Shridhar & Kavita Seth",  album: "Cocktail",               added: "2 months ago",  dur: "4:23", cv: 11, liked: true, phase: 3 },
-    { title: "Janam Janam",                  artist: "Arijit Singh & Antara Mitra",    album: "Dilwale",                added: "1 month ago",   dur: "5:21", cv: 12, liked: true, phase: 3 },
-    { title: "Shubhaarambh",                 artist: "Divya Kumar & Sneha Khanwalkar", album: "Kai Po Che!",            added: "3 weeks ago",   dur: "4:12", cv: 13, liked: true, phase: 3 },
+    { title: "Raataan Lambiyan",             artist: "Jubin Nautiyal & Asees Kaur",    album: "Shershaah",              added: "3 months ago",  dur: "3:50", cv: 10, liked: true, phase: 3, src: SONG_BASE + "Raataan%20Lambiyan%20Shershaah%20128%20Kbps.mp3" },
+    { title: "Tumhi Ho Bandhu",              artist: "Neeraj Shridhar & Kavita Seth",  album: "Cocktail",               added: "2 months ago",  dur: "4:23", cv: 11, liked: true, phase: 3, src: SONG_BASE + "Tum%20Hi%20Ho%20Bandhu%20Cocktail%20128%20Kbps.mp3" },
+    { title: "Janam Janam",                  artist: "Arijit Singh & Antara Mitra",    album: "Dilwale",                added: "1 month ago",   dur: "5:21", cv: 12, liked: true, phase: 3, src: SONG_BASE + "Janam%20Janam%20Dilwale%20128%20Kbps.mp3" },
+    { title: "Shubhaarambh",                 artist: "Divya Kumar & Sneha Khanwalkar", album: "Kai Po Che!",            added: "3 weeks ago",   dur: "4:12", cv: 13, liked: true, phase: 3, src: SONG_BASE + "Shubhaarambh%20Kai%20Po%20Che%20128%20Kbps.mp3" },
+    { title: "Love You Zindagi",             artist: "Amit Trivedi & Jasleen Royal",   album: "Dear Zindagi",           added: "2 weeks ago",   dur: "3:24", cv: 14, liked: true, phase: 3, src: SONG_BASE + "Love%20You%20Zindagi%20Dear%20Zindagi%20128%20Kbps.mp3" },
   ];
 
   const chapters = [
@@ -1618,58 +1620,96 @@
   const npElapsed= document.getElementById('npElapsed');
   const npTotal  = document.getElementById('npTotal');
   const npBar    = document.getElementById('npBar');
+  const [prevBtn, nextBtn] = document.querySelectorAll('.np-controls .np-btn');
+
+  const audio = new Audio();
+  audio.preload = 'metadata';
 
   let playing = false;
   let current = 0;
-  let elapsed = 43;
-  let timer;
 
   const PAUSE_ICON = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
   const PLAY_ICON  = '<path d="M8 5v14l11-7z"/>';
 
   const parseDur = (s) => { const [m, ss] = s.split(':').map(Number); return m * 60 + ss; };
-  const fmt = (s) => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  const fmt = (s) => {
+    if (!isFinite(s) || s < 0) s = 0;
+    s = Math.floor(s);
+    return `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+  };
+
+  function updatePlayIcons() {
+    playIcon.innerHTML   = playing ? PAUSE_ICON : PLAY_ICON;
+    npPlayIcon.innerHTML = playing ? PAUSE_ICON : PLAY_ICON;
+    playBtn.classList.toggle('playing', playing);
+  }
 
   function loadTrack(i, autoplay = true) {
-    current = i;
-    const t = tracks[i];
-    npTitle.textContent = t.title;
+    current = ((i % tracks.length) + tracks.length) % tracks.length;
+    const t = tracks[current];
+    npTitle.textContent  = t.title;
     npArtist.textContent = t.artist;
-    npCover.className = 'np-cover cv-' + t.cv;
-    npTotal.textContent = t.dur;
-    elapsed = 0;
+    npCover.className    = 'np-cover cv-' + t.cv;
+    npTotal.textContent  = t.dur;
     npElapsed.textContent = '0:00';
     npFill.style.width = '0%';
 
     document.querySelectorAll('.track').forEach(el => el.classList.remove('playing'));
-    document.querySelector(`.track[data-i="${i}"]`)?.classList.add('playing');
+    document.querySelector(`.track[data-i="${current}"]`)?.classList.add('playing');
 
+    audio.src = t.src;
     if (autoplay) setPlaying(true);
+    else { playing = false; updatePlayIcons(); }
   }
 
   function setPlaying(p) {
-    playing = p;
-    playIcon.innerHTML = p ? PAUSE_ICON : PLAY_ICON;
-    npPlayIcon.innerHTML = p ? PAUSE_ICON : PLAY_ICON;
-    playBtn.classList.toggle('playing', p);
-    clearInterval(timer);
     if (p) {
-      timer = setInterval(() => {
-        const total = parseDur(tracks[current].dur);
-        elapsed++;
-        if (elapsed >= total) {
-          const next = (current + 1) % tracks.length;
-          loadTrack(next, true);
-          return;
-        }
-        npElapsed.textContent = fmt(elapsed);
-        npFill.style.width = (elapsed / total * 100) + '%';
-      }, 1000);
+      const playPromise = audio.play();
+      if (playPromise && typeof playPromise.then === 'function') {
+        playPromise.then(() => {
+          playing = true;
+          updatePlayIcons();
+        }).catch((err) => {
+          playing = false;
+          updatePlayIcons();
+          console.warn('playback blocked or failed:', err);
+        });
+      } else {
+        playing = true;
+        updatePlayIcons();
+      }
+    } else {
+      audio.pause();
+      playing = false;
+      updatePlayIcons();
     }
   }
 
+  audio.addEventListener('timeupdate', () => {
+    const total = audio.duration;
+    npElapsed.textContent = fmt(audio.currentTime);
+    if (isFinite(total) && total > 0) {
+      npFill.style.width = (audio.currentTime / total * 100) + '%';
+    }
+  });
+  audio.addEventListener('loadedmetadata', () => {
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      npTotal.textContent = fmt(audio.duration);
+    }
+  });
+  audio.addEventListener('ended', () => {
+    loadTrack(current + 1, true);
+  });
+  audio.addEventListener('play',  () => { playing = true;  updatePlayIcons(); });
+  audio.addEventListener('pause', () => { playing = false; updatePlayIcons(); });
+  audio.addEventListener('error', () => {
+    console.warn('audio error for', tracks[current]?.title, audio.error);
+  });
+
   playBtn.addEventListener('click', () => setPlaying(!playing));
-  npPlay.addEventListener('click', () => setPlaying(!playing));
+  npPlay.addEventListener('click',  () => setPlaying(!playing));
+  prevBtn?.addEventListener('click', () => loadTrack(current - 1, true));
+  nextBtn?.addEventListener('click', () => loadTrack(current + 1, true));
 
   document.querySelectorAll('.track').forEach(el => {
     el.addEventListener('click', (e) => {
@@ -1720,16 +1760,15 @@
 
   npBar.addEventListener('click', (e) => {
     const rect = npBar.getBoundingClientRect();
-    const pct = (e.clientX - rect.left) / rect.width;
-    const total = parseDur(tracks[current].dur);
-    elapsed = Math.floor(total * pct);
-    npElapsed.textContent = fmt(elapsed);
+    const pct  = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+    if (isFinite(audio.duration) && audio.duration > 0) {
+      audio.currentTime = audio.duration * pct;
+    }
     npFill.style.width = (pct * 100) + '%';
   });
 
-  // Initial state
-  document.querySelector(`.track[data-i="0"]`)?.classList.add('playing');
-  npFill.style.width = (43 / parseDur(tracks[0].dur) * 100) + '%';
+  // Initial state — load track 0 paused, awaiting a user click
+  loadTrack(0, false);
 </script>
 
 </body>
