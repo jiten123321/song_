@@ -1349,18 +1349,48 @@
     position: fixed;
     inset: 0;
     z-index: 2000;
-    display: grid;
-    place-items: center;
-    padding: 24px;
-    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px 18px;
+    overflow-y: auto;
+    overflow-x: hidden;
     background:
-      radial-gradient(ellipse at top left, #ffdce5 0%, transparent 55%),
-      radial-gradient(ellipse at bottom right, #fff0d6 0%, transparent 55%),
-      linear-gradient(180deg, #fff5f8 0%, #ffd6e0 100%);
-    animation: welcome-fade-in 0.6s ease-out backwards;
+      radial-gradient(ellipse at 18% 22%, rgba(255, 200, 215, 0.55) 0%, transparent 50%),
+      radial-gradient(ellipse at 82% 78%, rgba(255, 220, 180, 0.50) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 50%, rgba(255, 240, 245, 0.0) 0%, rgba(255, 214, 224, 0.35) 100%),
+      linear-gradient(180deg, #ffeaf1 0%, #ffd0dc 50%, #ffe2c8 100%);
+    animation: welcome-fade-in 0.7s ease-out backwards;
   }
-  .welcome.closing { animation: welcome-fade-out 0.6s ease-in forwards; }
+  .welcome.closing { animation: welcome-fade-out 0.65s ease-in forwards; }
   .welcome.hidden { display: none; }
+
+  /* Soft cinematic light orbs drifting behind the card */
+  .welcome::before,
+  .welcome::after {
+    content: '';
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(60px);
+    pointer-events: none;
+    z-index: 0;
+    animation: orb-drift 14s ease-in-out infinite;
+  }
+  .welcome::before {
+    width: 360px; height: 360px;
+    background: radial-gradient(circle, rgba(255, 182, 197, 0.55), transparent 70%);
+    top: -80px; left: -80px;
+  }
+  .welcome::after {
+    width: 420px; height: 420px;
+    background: radial-gradient(circle, rgba(255, 220, 180, 0.45), transparent 70%);
+    bottom: -120px; right: -120px;
+    animation-delay: -7s;
+  }
+  @keyframes orb-drift {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50%      { transform: translate(28px, -22px) scale(1.06); }
+  }
 
   @keyframes welcome-fade-in {
     from { opacity: 0; }
@@ -1371,47 +1401,87 @@
     to   { opacity: 0; transform: scale(1.04); }
   }
 
+  /* Slow petals + fireflies layered inside the welcome */
+  .welcome-petal-layer,
+  .welcome-fireflies {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 1;
+  }
+  .welcome-petal-layer .petal { animation-duration: 22s; opacity: 0.7; }
+
+  .firefly {
+    position: absolute;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 245, 210, 1) 0%, rgba(255, 200, 220, 0.7) 45%, transparent 75%);
+    box-shadow:
+      0 0 6px rgba(255, 235, 200, 0.95),
+      0 0 18px rgba(255, 180, 215, 0.55),
+      0 0 30px rgba(255, 200, 220, 0.35);
+    opacity: 0;
+    animation: firefly-twinkle 5s ease-in-out infinite;
+  }
+  @keyframes firefly-twinkle {
+    0%, 100% { opacity: 0;    transform: translate(0, 0) scale(0.6); }
+    20%      { opacity: 1;    transform: translate(calc(var(--fx, 6px) * 0.4), calc(var(--fy, -6px) * 0.4)) scale(1); }
+    50%      { opacity: 0.95; transform: translate(var(--fx, 6px), var(--fy, -8px)) scale(1.3); }
+    80%      { opacity: 0.7;  transform: translate(calc(var(--fx, 6px) * 0.6), calc(var(--fy, -6px) * 0.6)) scale(1); }
+  }
+
+  /* Glassmorphism card */
   .welcome-card {
     position: relative;
-    max-width: 460px;
+    z-index: 2;
+    max-width: 540px;
     width: 100%;
-    background: linear-gradient(180deg, #ffffff 0%, #fff5f8 100%);
-    border: 2px solid var(--pink-soft);
+    margin: auto;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.78) 0%, rgba(255, 245, 248, 0.62) 100%);
+    backdrop-filter: blur(24px) saturate(140%);
+    -webkit-backdrop-filter: blur(24px) saturate(140%);
+    border: 1px solid rgba(255, 255, 255, 0.75);
     border-radius: 32px;
-    padding: 52px 38px 40px;
+    padding: 52px 40px 42px;
     text-align: center;
     box-shadow:
-      0 24px 60px rgba(255, 107, 157, 0.28),
-      inset 0 0 0 6px white;
-    animation: welcome-pop 0.7s cubic-bezier(.34,1.56,.64,1) 0.12s backwards;
+      0 30px 80px rgba(233, 79, 135, 0.22),
+      0 0 0 1px rgba(255, 183, 197, 0.4),
+      inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    animation: welcome-pop 0.8s cubic-bezier(.34,1.56,.64,1) 0.15s backwards;
   }
   @keyframes welcome-pop {
-    from { opacity: 0; transform: translateY(18px) scale(0.92); }
+    from { opacity: 0; transform: translateY(22px) scale(0.92); }
     to   { opacity: 1; transform: translateY(0) scale(1); }
   }
   .welcome-card::before {
     content: '✿';
     position: absolute;
-    top: -10px; left: 22px;
+    top: -12px; left: 24px;
     color: var(--pink);
-    font-size: 22px;
+    font-size: 24px;
+    text-shadow: 0 0 12px rgba(255, 107, 157, 0.6);
     animation: spin-slow 10s linear infinite;
   }
   .welcome-card::after {
     content: '✦';
     position: absolute;
-    bottom: -10px; right: 24px;
+    bottom: -12px; right: 26px;
     color: var(--pink-soft);
-    font-size: 20px;
+    font-size: 22px;
+    text-shadow: 0 0 10px rgba(255, 183, 197, 0.6);
     animation: spin-slow 14s linear infinite reverse;
   }
 
   .welcome-bow {
-    font-size: 36px;
+    font-size: 38px;
     color: var(--pink);
     margin-bottom: 6px;
-    animation: heart-beat 2.4s ease-in-out infinite;
     line-height: 1;
+    text-shadow: 0 0 18px rgba(255, 107, 157, 0.45);
+    animation: heart-beat 2.4s ease-in-out infinite;
   }
   .welcome-eyebrow {
     font-family: 'Caveat', cursive;
@@ -1419,68 +1489,127 @@
     color: var(--pink-deep);
     font-weight: 600;
     margin-bottom: 2px;
+    letter-spacing: 0.01em;
   }
   .welcome-title {
     font-family: 'Instrument Serif', serif;
     font-style: italic;
-    font-size: clamp(46px, 9vw, 68px);
+    font-size: clamp(44px, 8.5vw, 62px);
     line-height: 1;
     background: linear-gradient(135deg, var(--text) 0%, var(--pink-deep) 100%);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
-    margin: 6px 0 18px;
+    margin: 4px 0 20px;
     letter-spacing: -0.02em;
   }
   .welcome-text {
-    font-size: 14.5px;
-    line-height: 1.65;
+    font-family: 'Instrument Serif', serif;
+    font-size: 16px;
+    line-height: 1.75;
     color: var(--text-soft);
-    margin-bottom: 14px;
-    font-weight: 500;
+    margin-bottom: 18px;
+    font-weight: 400;
+  }
+  .welcome-text + .welcome-text {
+    padding-top: 14px;
+    border-top: 1px dashed rgba(255, 183, 197, 0.45);
   }
   .welcome-text em {
     font-family: 'Caveat', cursive;
     font-style: normal;
-    font-size: 1.35em;
+    font-size: 1.32em;
     color: var(--pink-deep);
     font-weight: 600;
     letter-spacing: 0.01em;
   }
   .welcome-sign {
     font-family: 'Caveat', cursive;
-    font-size: 22px;
-    color: var(--pink);
-    margin-bottom: 22px;
+    font-size: 24px;
+    color: var(--pink-deep);
+    margin: 6px 0 24px;
     font-weight: 600;
+    line-height: 1.3;
   }
+
+  /* Glowing "Open the Garden" button */
   .welcome-btn {
+    position: relative;
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    padding: 14px 30px;
+    padding: 15px 34px;
     border-radius: 999px;
-    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    background: linear-gradient(135deg, #ff7ba8 0%, var(--pink) 50%, var(--pink-deep) 100%);
     color: white;
     font-family: 'Quicksand', sans-serif;
     font-size: 15px;
     font-weight: 700;
-    letter-spacing: 0.02em;
-    box-shadow: 0 8px 24px var(--pink-glow);
-    transition: transform 0.25s, box-shadow 0.25s;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    box-shadow:
+      0 8px 24px rgba(255, 107, 157, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.4);
+    transition: transform 0.3s, box-shadow 0.3s;
     cursor: pointer;
+    isolation: isolate;
   }
-  .welcome-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4); }
-  .welcome-btn:active { transform: scale(0.98); }
-  .welcome-btn::after { content: '♡'; font-size: 16px; }
+  .welcome-btn::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 999px;
+    background: conic-gradient(from 0deg,
+      rgba(255, 183, 197, 0.0),
+      rgba(255, 107, 157, 0.7),
+      rgba(255, 220, 180, 0.6),
+      rgba(255, 107, 157, 0.7),
+      rgba(255, 183, 197, 0.0));
+    filter: blur(14px);
+    opacity: 0.7;
+    z-index: -1;
+    animation: btn-glow-spin 6s linear infinite, btn-glow-pulse 3.2s ease-in-out infinite;
+  }
+  .welcome-btn::after { content: '🌷'; font-size: 16px; filter: drop-shadow(0 1px 2px rgba(0,0,0,0.2)); }
+  @keyframes btn-glow-spin {
+    to { transform: rotate(360deg); }
+  }
+  @keyframes btn-glow-pulse {
+    0%, 100% { opacity: 0.5; }
+    50%      { opacity: 0.95; }
+  }
+  .welcome-btn:hover {
+    transform: translateY(-3px) scale(1.04);
+    box-shadow:
+      0 14px 38px rgba(255, 107, 157, 0.55),
+      0 0 36px rgba(255, 107, 157, 0.45),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+  .welcome-btn:hover::before { opacity: 1; filter: blur(18px); }
+  .welcome-btn:active { transform: translateY(-1px) scale(0.99); }
+
+  /* Music player softly breathes */
+  @keyframes player-breathe {
+    0%, 100% { box-shadow: 0 8px 32px rgba(255, 143, 171, 0.15); }
+    50%      { box-shadow: 0 10px 44px rgba(255, 143, 171, 0.28), 0 0 24px rgba(255, 182, 193, 0.18); }
+  }
+  .player { animation: player-breathe 5s ease-in-out infinite; }
 
   @media (max-width: 640px) {
-    .welcome-card { padding: 42px 24px 30px; border-radius: 26px; }
-    .welcome-bow { font-size: 30px; }
+    .welcome { padding: 24px 14px; }
+    .welcome::before { width: 240px; height: 240px; }
+    .welcome::after  { width: 280px; height: 280px; }
+    .welcome-card {
+      padding: 42px 24px 30px;
+      border-radius: 26px;
+    }
+    .welcome-bow { font-size: 32px; }
     .welcome-eyebrow { font-size: 19px; }
-    .welcome-text { font-size: 13.5px; }
-    .welcome-sign { font-size: 19px; margin-bottom: 18px; }
-    .welcome-btn { padding: 12px 24px; font-size: 14px; }
+    .welcome-title { margin: 4px 0 14px; }
+    .welcome-text { font-size: 14.5px; line-height: 1.7; }
+    .welcome-text + .welcome-text { padding-top: 12px; }
+    .welcome-sign { font-size: 20px; margin-bottom: 20px; }
+    .welcome-btn { padding: 13px 26px; font-size: 14px; }
   }
 </style>
 </head>
@@ -1488,18 +1617,32 @@
 
 <!-- ✿ welcome overlay ✿ -->
 <div class="welcome" id="welcome">
+  <div class="welcome-petal-layer" id="welcomePetalLayer" aria-hidden="true"></div>
+  <div class="welcome-fireflies" id="welcomeFireflies" aria-hidden="true"></div>
   <div class="welcome-card">
     <div class="welcome-bow">✿</div>
-    <div class="welcome-eyebrow">before you press play…</div>
-    <h2 class="welcome-title">a letter for you.</h2>
+    <div class="welcome-eyebrow">a quiet little letter</div>
+    <h2 class="welcome-title">for one soul.</h2>
+
     <p class="welcome-text">
-      what follows is a love letter, told in chapters —<br>
-      the slow, quiet story of <em>two strangers</em> who somehow
-      stumbled into each other's lives, and how, song by song,
-      something real began to build.
+      This is a personal Spotify created quietly for one soul…<br>
+      to make her heart feel a little lighter,<br>
+      to give her the warmth she truly deserves,<br>
+      and to remind her that even during difficult days,<br>
+      <em>someone, somewhere, is thinking about her smile.</em>
     </p>
-    <p class="welcome-sign">turn the page when you're ready ♡</p>
-    <button class="welcome-btn" id="welcomeBtn" type="button">open the letter</button>
+
+    <p class="welcome-text">
+      This place is private… almost like a secret little letter hidden inside music.<br>
+      Instead of using pages, I used songs to describe every stage of my feelings —<br>
+      from <em>admiring you quietly,</em><br>
+      to <em>slowly falling for your soul,</em><br>
+      to <em>watching your strength while you heal and grow stronger every day.</em>
+    </p>
+
+    <p class="welcome-sign">so press play, open the garden,<br>and just stay here for a while 🌷</p>
+
+    <button class="welcome-btn" id="welcomeBtn" type="button">Open the Garden</button>
   </div>
 </div>
 
@@ -1937,10 +2080,70 @@
   // ============ WELCOME OVERLAY ============
   const welcome = document.getElementById('welcome');
   const welcomeBtn = document.getElementById('welcomeBtn');
+
+  // Slow, dreamy petals drifting inside the welcome scene
+  function spawnWelcomePetals(layer, count) {
+    if (!layer) return;
+    const variants = ['p1', 'p2', 'p3', 'p4'];
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      p.className = 'petal ' + variants[Math.floor(Math.random() * variants.length)];
+      const dur     = 18 + Math.random() * 14;
+      const delay   = -Math.random() * dur;
+      const leftVw  = Math.random() * 100;
+      const drift   = (Math.random() * 240 - 120);
+      const size    = 12 + Math.random() * 18;
+      p.style.left              = leftVw + 'vw';
+      p.style.width             = size + 'px';
+      p.style.height            = size + 'px';
+      p.style.animationDuration = dur + 's';
+      p.style.animationDelay    = delay + 's';
+      p.style.setProperty('--drift', drift + 'px');
+      p.style.setProperty('--peak-opacity', 0.55 + Math.random() * 0.3);
+      layer.appendChild(p);
+    }
+  }
+
+  // Tiny glowing fireflies tucked into the corners and edges
+  function spawnFireflies(layer, count) {
+    if (!layer) return;
+    for (let i = 0; i < count; i++) {
+      const f = document.createElement('div');
+      f.className = 'firefly';
+      // Bias toward the corners/edges so the center stays calm
+      const corner = Math.floor(Math.random() * 4);
+      const edgeBias = 6 + Math.random() * 22;       // percent from edge
+      const along    = Math.random() * 60 + 10;       // 10-70% along the edge
+      let left, top;
+      if (corner === 0)      { left = edgeBias;        top = edgeBias; }
+      else if (corner === 1) { left = 100 - edgeBias;  top = edgeBias; }
+      else if (corner === 2) { left = edgeBias;        top = 100 - edgeBias; }
+      else                   { left = 100 - edgeBias;  top = 100 - edgeBias; }
+      // jitter a bit along an edge
+      if (Math.random() < 0.5) left = along; else top = along;
+
+      f.style.left = left + '%';
+      f.style.top  = top + '%';
+      f.style.setProperty('--fx', (Math.random() * 24 - 12) + 'px');
+      f.style.setProperty('--fy', (Math.random() * 24 - 12) + 'px');
+      f.style.animationDelay    = (Math.random() * 4) + 's';
+      f.style.animationDuration = (3.5 + Math.random() * 3.5) + 's';
+      const scale = 0.7 + Math.random() * 0.9;
+      f.style.width = f.style.height = (5 * scale) + 'px';
+      layer.appendChild(f);
+    }
+  }
+
+  if (welcome && !welcome.classList.contains('hidden')) {
+    const isSmall = window.innerWidth < 640;
+    spawnWelcomePetals(document.getElementById('welcomePetalLayer'), isSmall ? 14 : 28);
+    spawnFireflies(document.getElementById('welcomeFireflies'),     isSmall ? 14 : 22);
+  }
+
   welcomeBtn?.addEventListener('click', (e) => {
     welcome.classList.add('closing');
     spawnFloatHeart(e.clientX, e.clientY);
-    setTimeout(() => welcome.classList.add('hidden'), 600);
+    setTimeout(() => welcome.classList.add('hidden'), 650);
   });
 </script>
 
