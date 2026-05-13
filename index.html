@@ -1177,7 +1177,8 @@
     .hero-desc { max-width: 100%; }
     .actions-note { font-size: 16px; }
     .np-tag { font-size: 16px; padding: 4px 10px; }
-    .phase-num, .phase-sep { display: none; }
+    .phase-divider { flex-wrap: wrap; gap: 8px; padding: 26px 14px 12px; }
+    .phase-num { font-size: 14px; }
     .phase-title { font-size: 18px; }
     .player { padding: 0 14px; gap: 10px; }
   }
@@ -1268,7 +1269,15 @@
     .track:hover .t-num { display: block; }
     .track:hover .t-play { display: none; }
 
-    .phase-divider { padding: 20px 8px 10px; }
+    .phase-divider {
+      flex-wrap: wrap;
+      row-gap: 2px;
+      column-gap: 6px;
+      padding: 22px 10px 10px;
+    }
+    .phase-divider::before,
+    .phase-divider::after { flex: 0 1 28px; min-width: 20px; }
+    .phase-num { font-size: 13px; }
     .phase-title { font-size: 17px; }
 
     .signature {
