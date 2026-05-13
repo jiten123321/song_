@@ -1343,9 +1343,165 @@
     .track:hover .t-play { display: none; }
     .nav-item:hover, .lib-item:hover { transform: none; }
   }
+
+  /* =================== WELCOME OVERLAY =================== */
+  .welcome {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    overflow: hidden;
+    background:
+      radial-gradient(ellipse at top left, #ffdce5 0%, transparent 55%),
+      radial-gradient(ellipse at bottom right, #fff0d6 0%, transparent 55%),
+      linear-gradient(180deg, #fff5f8 0%, #ffd6e0 100%);
+    animation: welcome-fade-in 0.6s ease-out backwards;
+  }
+  .welcome.closing { animation: welcome-fade-out 0.6s ease-in forwards; }
+  .welcome.hidden { display: none; }
+
+  @keyframes welcome-fade-in {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes welcome-fade-out {
+    from { opacity: 1; transform: scale(1); }
+    to   { opacity: 0; transform: scale(1.04); }
+  }
+
+  .welcome-card {
+    position: relative;
+    max-width: 460px;
+    width: 100%;
+    background: linear-gradient(180deg, #ffffff 0%, #fff5f8 100%);
+    border: 2px solid var(--pink-soft);
+    border-radius: 32px;
+    padding: 52px 38px 40px;
+    text-align: center;
+    box-shadow:
+      0 24px 60px rgba(255, 107, 157, 0.28),
+      inset 0 0 0 6px white;
+    animation: welcome-pop 0.7s cubic-bezier(.34,1.56,.64,1) 0.12s backwards;
+  }
+  @keyframes welcome-pop {
+    from { opacity: 0; transform: translateY(18px) scale(0.92); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+  .welcome-card::before {
+    content: '✿';
+    position: absolute;
+    top: -10px; left: 22px;
+    color: var(--pink);
+    font-size: 22px;
+    animation: spin-slow 10s linear infinite;
+  }
+  .welcome-card::after {
+    content: '✦';
+    position: absolute;
+    bottom: -10px; right: 24px;
+    color: var(--pink-soft);
+    font-size: 20px;
+    animation: spin-slow 14s linear infinite reverse;
+  }
+
+  .welcome-bow {
+    font-size: 36px;
+    color: var(--pink);
+    margin-bottom: 6px;
+    animation: heart-beat 2.4s ease-in-out infinite;
+    line-height: 1;
+  }
+  .welcome-eyebrow {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--pink-deep);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  .welcome-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(46px, 9vw, 68px);
+    line-height: 1;
+    background: linear-gradient(135deg, var(--text) 0%, var(--pink-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin: 6px 0 18px;
+    letter-spacing: -0.02em;
+  }
+  .welcome-text {
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+    font-weight: 500;
+  }
+  .welcome-text em {
+    font-family: 'Caveat', cursive;
+    font-style: normal;
+    font-size: 1.35em;
+    color: var(--pink-deep);
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+  .welcome-sign {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--pink);
+    margin-bottom: 22px;
+    font-weight: 600;
+  }
+  .welcome-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 30px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color: white;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    box-shadow: 0 8px 24px var(--pink-glow);
+    transition: transform 0.25s, box-shadow 0.25s;
+    cursor: pointer;
+  }
+  .welcome-btn:hover { transform: translateY(-2px) scale(1.03); box-shadow: 0 12px 32px rgba(255, 107, 157, 0.4); }
+  .welcome-btn:active { transform: scale(0.98); }
+  .welcome-btn::after { content: '♡'; font-size: 16px; }
+
+  @media (max-width: 640px) {
+    .welcome-card { padding: 42px 24px 30px; border-radius: 26px; }
+    .welcome-bow { font-size: 30px; }
+    .welcome-eyebrow { font-size: 19px; }
+    .welcome-text { font-size: 13.5px; }
+    .welcome-sign { font-size: 19px; margin-bottom: 18px; }
+    .welcome-btn { padding: 12px 24px; font-size: 14px; }
+  }
 </style>
 </head>
 <body>
+
+<!-- ✿ welcome overlay ✿ -->
+<div class="welcome" id="welcome">
+  <div class="welcome-card">
+    <div class="welcome-bow">✿</div>
+    <div class="welcome-eyebrow">before you press play…</div>
+    <h2 class="welcome-title">a letter for you.</h2>
+    <p class="welcome-text">
+      what follows is a love letter, told in chapters —<br>
+      the slow, quiet story of <em>two strangers</em> who somehow
+      stumbled into each other's lives, and how, song by song,
+      something real began to build.
+    </p>
+    <p class="welcome-sign">turn the page when you're ready ♡</p>
+    <button class="welcome-btn" id="welcomeBtn" type="button">open the letter</button>
+  </div>
+</div>
 
 <!-- ✿ falling petals ✿ -->
 <div class="petal-layer" id="petalLayer"></div>
@@ -1777,6 +1933,15 @@
 
   // Initial state — load track 0 paused, awaiting a user click
   loadTrack(0, false);
+
+  // ============ WELCOME OVERLAY ============
+  const welcome = document.getElementById('welcome');
+  const welcomeBtn = document.getElementById('welcomeBtn');
+  welcomeBtn?.addEventListener('click', (e) => {
+    welcome.classList.add('closing');
+    spawnFloatHeart(e.clientX, e.clientY);
+    setTimeout(() => welcome.classList.add('hidden'), 600);
+  });
 </script>
 
 </body>
