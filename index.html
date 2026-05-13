@@ -1,0 +1,1566 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>isha — a playlist 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --bg:         #fff5f8;
+    --bg-soft:    #ffeaf1;
+    --bg-card:    #ffffff;
+    --bg-hover:   #ffe0ea;
+    --bg-deeper:  #ffd6e0;
+    --line:       #ffd1de;
+    --text:       #4a2433;
+    --text-soft:  #8c5a6e;
+    --text-dim:   #c08a9b;
+    --pink:       #ff6b9d;
+    --pink-deep:  #e94f87;
+    --pink-soft:  #ffb7c5;
+    --pink-glow:  rgba(255, 107, 157, 0.25);
+    --cream:      #fff8fb;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    height: 100%;
+    overflow: hidden;
+    background: var(--bg);
+    background-image:
+      radial-gradient(ellipse at top left, #ffe0ea 0%, transparent 50%),
+      radial-gradient(ellipse at bottom right, #fff0d6 0%, transparent 50%),
+      linear-gradient(180deg, #fff5f8 0%, #ffe9f0 100%);
+    color: var(--text);
+    font-family: 'Quicksand', system-ui, sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+
+  /* ===== CHERRY BLOSSOM PETALS ===== */
+  .petal-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+    overflow: hidden;
+  }
+  .petal {
+    position: absolute;
+    top: -40px;
+    pointer-events: none;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    will-change: transform;
+    animation-name: petal-fall;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    filter: drop-shadow(0 2px 4px rgba(255, 143, 171, 0.2));
+  }
+  .petal.p1 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffd6e0'/><circle cx='12' cy='14' r='1.5' fill='%23ff8fab' opacity='0.4'/></svg>"); }
+  .petal.p2 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffb7c5'/><circle cx='12' cy='14' r='1.5' fill='%23ff6b9d' opacity='0.45'/></svg>"); }
+  .petal.p3 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ff8fab'/><circle cx='12' cy='14' r='1.5' fill='%23e94f87' opacity='0.5'/></svg>"); }
+  .petal.p4 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffe4ec'/></svg>"); }
+
+  @keyframes petal-fall {
+    0%   { transform: translate3d(0, -10vh, 0) rotate(0deg);   opacity: 0; }
+    8%   { opacity: var(--peak-opacity, 0.85); }
+    50%  { transform: translate3d(calc(var(--drift, 60px) * 0.5), 50vh, 0) rotate(360deg); }
+    92%  { opacity: var(--peak-opacity, 0.85); }
+    100% { transform: translate3d(var(--drift, 60px), 110vh, 0) rotate(720deg); opacity: 0; }
+  }
+
+  /* Sparkles in the background */
+  .sparkle-layer {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .sparkle {
+    position: absolute;
+    color: var(--pink-soft);
+    font-size: 14px;
+    opacity: 0;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.5); }
+    50%      { opacity: 0.6; transform: scale(1); }
+  }
+
+  /* ===== APP GRID ===== */
+  .app {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    grid-template-rows: 1fr 84px;
+    height: 100vh;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  /* ===== SIDEBAR ===== */
+  .sidebar {
+    background: var(--cream);
+    border-radius: 22px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 8px 32px rgba(255, 143, 171, 0.12);
+    border: 1px solid var(--line);
+  }
+
+  .nav {
+    padding: 22px 22px 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-soft);
+    transition: background 0.2s, color 0.2s, transform 0.15s;
+  }
+  .nav-item:hover {
+    color: var(--pink-deep);
+    background: var(--bg-hover);
+    transform: translateX(2px);
+  }
+  .nav-item svg { width: 20px; height: 20px; flex-shrink: 0; }
+
+  .library {
+    margin: 14px 10px 10px;
+    background: var(--bg-card);
+    border-radius: 18px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: inset 0 0 0 1px var(--line);
+  }
+  .library-head {
+    padding: 18px 20px 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .library-head .label {
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--text-soft);
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .library-head .plus {
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    background: var(--bg-hover);
+    color: var(--pink-deep);
+    display: grid; place-items: center;
+    transition: transform 0.2s, background 0.2s;
+  }
+  .library-head .plus:hover { transform: rotate(90deg) scale(1.05); background: var(--pink-soft); color: white; }
+
+  .pills {
+    display: flex;
+    gap: 6px;
+    padding: 0 16px 14px;
+    flex-wrap: wrap;
+  }
+  .pill {
+    padding: 6px 14px;
+    border-radius: 999px;
+    background: var(--bg-hover);
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    transition: all 0.2s;
+  }
+  .pill.active {
+    background: linear-gradient(135deg, var(--pink) 0%, var(--pink-deep) 100%);
+    color: white;
+    box-shadow: 0 4px 12px var(--pink-glow);
+  }
+  .pill:not(.active):hover { background: var(--bg-deeper); color: var(--text); }
+
+  .lib-list {
+    padding: 4px 10px 10px;
+    overflow-y: auto;
+    flex: 1;
+  }
+  .lib-list::-webkit-scrollbar { width: 6px; }
+  .lib-list::-webkit-scrollbar-thumb { background: var(--pink-soft); border-radius: 3px; }
+
+  .lib-item {
+    display: grid;
+    grid-template-columns: 50px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 8px;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.2s;
+    margin-bottom: 2px;
+  }
+  .lib-item:hover { background: var(--bg-hover); transform: translateX(2px); }
+  .lib-item.active {
+    background: linear-gradient(135deg, rgba(255, 182, 193, 0.4) 0%, rgba(255, 214, 224, 0.4) 100%);
+    box-shadow: inset 0 0 0 1px var(--pink-soft);
+  }
+  .lib-item.ghost { opacity: 0.45; }
+
+  .lib-cover {
+    width: 50px; height: 50px;
+    border-radius: 12px;
+    background: var(--bg-deeper);
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+  }
+  .lib-cover.her {
+    background:
+      radial-gradient(circle at 30% 25%, #fff0f4 0%, transparent 55%),
+      radial-gradient(circle at 75% 80%, #ff6b9d 0%, transparent 60%),
+      linear-gradient(135deg, #ffb7c5 0%, #ff8fab 100%);
+    box-shadow: 0 4px 12px var(--pink-glow);
+  }
+  .lib-cover.her::after {
+    content: 'i';
+    position: absolute;
+    inset: 0;
+    display: grid; place-items: center;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 34px;
+    color: white;
+    line-height: 1;
+    text-shadow: 0 2px 6px rgba(233, 79, 135, 0.4);
+  }
+  .lib-cover.g1 { background: linear-gradient(135deg, #ffe0ea, #ffc8d6); }
+  .lib-cover.g2 { background: linear-gradient(135deg, #ffd6e0, #ffb7c5); }
+  .lib-cover.g3 { background: linear-gradient(135deg, #ffe8d6, #ffd6e0); }
+
+  .lib-meta { min-width: 0; }
+  .lib-title {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .lib-sub {
+    font-size: 11.5px;
+    color: var(--text-soft);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .lib-pin {
+    color: var(--pink);
+    font-size: 14px;
+    filter: drop-shadow(0 1px 2px var(--pink-glow));
+  }
+
+  /* ===== MAIN ===== */
+  .main {
+    background: var(--cream);
+    border-radius: 22px;
+    overflow-y: auto;
+    position: relative;
+    box-shadow: 0 8px 32px rgba(255, 143, 171, 0.12);
+    border: 1px solid var(--line);
+  }
+  .main::-webkit-scrollbar { width: 10px; }
+  .main::-webkit-scrollbar-track { background: var(--cream); }
+  .main::-webkit-scrollbar-thumb {
+    background: var(--pink-soft);
+    border-radius: 5px;
+    border: 2px solid var(--cream);
+  }
+
+  .topbar {
+    position: sticky; top: 0;
+    z-index: 10;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 26px;
+    background: linear-gradient(180deg, rgba(255, 248, 251, 0.96) 0%, rgba(255, 248, 251, 0) 100%);
+    backdrop-filter: blur(12px);
+  }
+  .nav-arrows { display: flex; gap: 8px; }
+  .arrow {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: var(--bg-hover);
+    display: grid; place-items: center;
+    color: var(--text-soft);
+    transition: all 0.2s;
+  }
+  .arrow:hover:not(:disabled) { background: var(--pink-soft); color: white; transform: scale(1.05); }
+  .arrow:disabled { opacity: 0.5; cursor: default; }
+
+  .top-actions { display: flex; gap: 12px; align-items: center; }
+  .btn-pill {
+    padding: 9px 16px;
+    border-radius: 999px;
+    background: white;
+    font-size: 12.5px;
+    font-weight: 700;
+    color: var(--text);
+    border: 1.5px solid var(--line);
+    transition: all 0.2s;
+  }
+  .btn-pill:hover { background: var(--bg-hover); border-color: var(--pink-soft); transform: translateY(-1px); }
+  .btn-pill.primary {
+    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color: white;
+    border: none;
+    box-shadow: 0 4px 12px var(--pink-glow);
+  }
+  .btn-pill.primary:hover { transform: translateY(-1px) scale(1.02); box-shadow: 0 6px 18px var(--pink-glow); }
+  .avatar {
+    width: 34px; height: 34px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink-soft), var(--pink));
+    display: grid; place-items: center;
+    font-size: 14px;
+    font-weight: 800;
+    color: white;
+    box-shadow: 0 2px 8px var(--pink-glow);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    padding: 24px 36px 30px;
+    display: flex;
+    gap: 28px;
+    align-items: flex-end;
+    background:
+      linear-gradient(180deg, rgba(255, 182, 193, 0.55) 0%, rgba(255, 248, 251, 0) 100%);
+    min-height: 360px;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 20% 10%, rgba(255, 214, 224, 0.6), transparent 50%),
+      radial-gradient(circle at 80% 0%, rgba(255, 143, 171, 0.4), transparent 60%);
+    pointer-events: none;
+  }
+  /* Decorative big sakura behind the hero */
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 280px; height: 280px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><g opacity='0.4'><path d='M50 20 C 56 28, 62 35, 58 45 C 54 52, 50 50, 50 50 C 50 50, 46 52, 42 45 C 38 35, 44 28, 50 20 Z' fill='%23ffb7c5'/><path d='M80 50 C 72 56, 65 62, 55 58 C 48 54, 50 50, 50 50 C 50 50, 48 46, 55 42 C 65 38, 72 44, 80 50 Z' fill='%23ffd6e0'/><path d='M50 80 C 44 72, 38 65, 42 55 C 46 48, 50 50, 50 50 C 50 50, 54 48, 58 55 C 62 65, 56 72, 50 80 Z' fill='%23ffb7c5'/><path d='M20 50 C 28 44, 35 38, 45 42 C 52 46, 50 50, 50 50 C 50 50, 52 54, 45 58 C 35 62, 28 56, 20 50 Z' fill='%23ffd6e0'/><circle cx='50' cy='50' r='5' fill='%23ff8fab'/></g></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.7;
+    animation: float-rotate 20s ease-in-out infinite;
+    pointer-events: none;
+  }
+  @keyframes float-rotate {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-20px) rotate(180deg); }
+  }
+
+  .hero-art {
+    width: 240px; height: 240px;
+    border-radius: 24px;
+    box-shadow: 0 12px 48px rgba(255, 107, 157, 0.35);
+    background:
+      radial-gradient(circle at 28% 22%, #fff5f8 0%, transparent 55%),
+      radial-gradient(circle at 78% 82%, #e94f87 0%, transparent 65%),
+      linear-gradient(135deg, #ffb7c5 0%, #ff6b9d 100%);
+    position: relative;
+    overflow: hidden;
+    flex-shrink: 0;
+    z-index: 1;
+  }
+  .hero-art::after {
+    content: 'isha.';
+    position: absolute;
+    inset: 0;
+    display: grid; place-items: center;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 96px;
+    color: white;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    text-shadow: 0 4px 24px rgba(233, 79, 135, 0.45);
+  }
+  .hero-art::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 70% 28%, rgba(255,255,255,0.25), transparent 45%);
+  }
+  /* Tiny floating petals on top of the cover art */
+  .hero-art-petals {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+  }
+  .hero-art-petals span {
+    position: absolute;
+    width: 14px; height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23fff'/></svg>");
+    background-size: contain;
+    opacity: 0.85;
+    animation: tiny-float 6s ease-in-out infinite;
+  }
+  .hero-art-petals span:nth-child(1) { top: 14%; left: 12%; animation-delay: 0s;  }
+  .hero-art-petals span:nth-child(2) { top: 70%; left: 18%; animation-delay: 1.5s; width: 10px; height: 10px;}
+  .hero-art-petals span:nth-child(3) { top: 20%; right: 18%; animation-delay: 3s; width: 12px; height: 12px;}
+  .hero-art-petals span:nth-child(4) { top: 80%; right: 14%; animation-delay: 4.5s; }
+  @keyframes tiny-float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50%      { transform: translateY(-10px) rotate(180deg); }
+  }
+
+  .hero-info {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .hero-label {
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--pink-deep);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .hero-label::before {
+    content: '✿';
+    font-size: 16px;
+  }
+  .hero-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: clamp(74px, 11vw, 168px);
+    font-weight: 400;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    margin: -8px 0 -4px;
+    background: linear-gradient(135deg, var(--text) 0%, var(--pink-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    position: relative;
+  }
+  .hero-title::after {
+    content: '✿';
+    position: absolute;
+    font-size: 0.18em;
+    color: var(--pink);
+    margin-left: 12px;
+    -webkit-text-fill-color: var(--pink);
+    vertical-align: super;
+    animation: spin-slow 8s linear infinite;
+    display: inline-block;
+  }
+  @keyframes spin-slow {
+    to { transform: rotate(360deg); }
+  }
+  .hero-desc {
+    font-size: 14.5px;
+    color: var(--text-soft);
+    max-width: 560px;
+    line-height: 1.6;
+    font-weight: 500;
+  }
+  .hero-meta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--text);
+    margin-top: 2px;
+    font-weight: 600;
+  }
+  .hero-meta .by { font-weight: 800; color: var(--pink-deep); }
+  .hero-meta .dot { color: var(--text-dim); }
+  .hero-meta .muted { color: var(--text-soft); font-weight: 500; }
+
+  /* ===== ACTIONS BAR ===== */
+  .actions {
+    padding: 24px 36px 12px;
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    background: linear-gradient(180deg, rgba(255, 214, 224, 0.4) 0%, rgba(255, 248, 251, 0) 100%);
+  }
+  .play-btn {
+    width: 60px; height: 60px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color: white;
+    display: grid; place-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 6px 24px var(--pink-glow);
+  }
+  .play-btn:hover { transform: scale(1.08); box-shadow: 0 8px 32px rgba(255, 107, 157, 0.45); }
+  .play-btn svg { margin-left: 2px; }
+  .play-btn.playing svg { margin-left: 0; }
+
+  .icon-btn {
+    color: var(--text-soft);
+    transition: color 0.2s, transform 0.2s;
+    display: grid; place-items: center;
+  }
+  .icon-btn:hover { color: var(--pink-deep); transform: scale(1.1); }
+  .icon-btn.liked { color: var(--pink); }
+  .icon-btn.liked:hover { color: var(--pink-deep); }
+
+  /* ===== TRACK LIST ===== */
+  .tracks {
+    padding: 12px 28px 32px;
+  }
+  .tracks-head {
+    display: grid;
+    grid-template-columns: 36px 4fr 3fr 2fr 90px;
+    gap: 16px;
+    padding: 10px 18px;
+    border-bottom: 1.5px solid var(--line);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--text-soft);
+    margin-bottom: 8px;
+    font-weight: 700;
+  }
+  .tracks-head .num { text-align: center; }
+  .tracks-head .dur { text-align: right; padding-right: 16px; }
+
+  .track {
+    display: grid;
+    grid-template-columns: 36px 4fr 3fr 2fr 90px;
+    gap: 16px;
+    padding: 10px 18px;
+    border-radius: 14px;
+    align-items: center;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+  }
+  .track:hover {
+    background: linear-gradient(90deg, rgba(255, 214, 224, 0.5) 0%, rgba(255, 214, 224, 0.2) 100%);
+  }
+  .track.playing {
+    background: linear-gradient(90deg, rgba(255, 182, 193, 0.5) 0%, rgba(255, 214, 224, 0.25) 100%);
+  }
+  .track.playing .t-title { color: var(--pink-deep); }
+
+  .t-num {
+    text-align: center;
+    color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+    font-size: 14px;
+    font-weight: 600;
+  }
+  .track:hover .t-num { display: none; }
+  .track .t-play { display: none; text-align: center; color: var(--pink-deep); }
+  .track:hover .t-play { display: block; }
+
+  .t-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .t-cover {
+    width: 44px; height: 44px;
+    border-radius: 10px;
+    flex-shrink: 0;
+    box-shadow: 0 3px 10px rgba(255, 143, 171, 0.18);
+  }
+  .t-meta { min-width: 0; }
+  .t-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .t-artist {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    margin-top: 2px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+  .t-album, .t-added {
+    font-size: 13px;
+    color: var(--text-soft);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: 500;
+  }
+  .t-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 16px;
+    color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+    font-size: 13px;
+    padding-right: 16px;
+    font-weight: 600;
+  }
+  .t-heart {
+    opacity: 0;
+    transition: opacity 0.15s, color 0.15s, transform 0.2s;
+    color: var(--text-soft);
+  }
+  .track:hover .t-heart { opacity: 1; }
+  .t-heart.liked { opacity: 1; color: var(--pink); }
+  .t-heart:hover { color: var(--pink-deep); transform: scale(1.2); }
+
+  /* Track cover gradients — all soft pinks */
+  .cv-1  { background: linear-gradient(135deg, #ffd6e0, #ff8fab); }
+  .cv-2  { background: linear-gradient(135deg, #ffe4ec, #ff6b9d); }
+  .cv-3  { background: linear-gradient(135deg, #ffb7c5, #e94f87); }
+  .cv-4  { background: linear-gradient(135deg, #ffe0ea, #ffa0b8); }
+  .cv-5  { background: linear-gradient(135deg, #fff0f4, #ffb7c5); }
+  .cv-6  { background: linear-gradient(135deg, #ffcad6, #d63d75); }
+  .cv-7  { background: linear-gradient(135deg, #ffd6e0, #ff8fab); }
+  .cv-8  { background: linear-gradient(135deg, #ffe8d6, #ff8fab); }
+  .cv-9  { background: linear-gradient(135deg, #ffbacc, #ff6b9d); }
+  .cv-10 { background: linear-gradient(135deg, #ffe4ec, #ec5e8a); }
+  .cv-11 { background: linear-gradient(135deg, #f8d0d6, #c84f7c); }
+  .cv-12 { background: linear-gradient(135deg, #ffd6df, #f08bb0); }
+  .cv-13 { background: linear-gradient(135deg, #ffc8d6, #e85a8a); }
+  .cv-14 { background: linear-gradient(135deg, #ffe8ec, #d44a78); }
+
+  /* ===== SIGNATURE ===== */
+  .signature {
+    padding: 32px 32px 56px;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 19px;
+    color: var(--text-soft);
+    text-align: center;
+    border-top: 1.5px solid var(--line);
+    margin: 20px 36px 0;
+    position: relative;
+  }
+  .signature span { color: var(--pink-deep); }
+  .signature::before, .signature::after {
+    content: '✿';
+    color: var(--pink-soft);
+    margin: 0 12px;
+    font-style: normal;
+    display: inline-block;
+    animation: spin-slow 10s linear infinite;
+  }
+
+  /* ===== NOW PLAYING BAR ===== */
+  .player {
+    grid-column: 1 / -1;
+    background: var(--cream);
+    border-radius: 22px;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    align-items: center;
+    padding: 0 20px;
+    gap: 16px;
+    box-shadow: 0 8px 32px rgba(255, 143, 171, 0.15);
+    border: 1px solid var(--line);
+  }
+
+  .np-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    min-width: 0;
+  }
+  .np-cover {
+    width: 58px; height: 58px;
+    border-radius: 12px;
+    flex-shrink: 0;
+    box-shadow: 0 3px 12px rgba(255, 143, 171, 0.2);
+  }
+  .np-meta { min-width: 0; }
+  .np-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .np-artist {
+    font-size: 11.5px;
+    color: var(--text-soft);
+    margin-top: 2px;
+    font-weight: 500;
+  }
+  .np-like {
+    margin-left: 10px;
+    color: var(--pink);
+    transition: transform 0.2s;
+  }
+  .np-like:hover { transform: scale(1.15); }
+
+  .np-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    max-width: 720px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .np-controls {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .np-btn {
+    color: var(--text-soft);
+    transition: color 0.2s, transform 0.2s;
+    display: grid; place-items: center;
+  }
+  .np-btn:hover { color: var(--pink-deep); transform: scale(1.08); }
+  .np-btn.active { color: var(--pink); }
+  .np-play {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--pink), var(--pink-deep));
+    color: white;
+    display: grid; place-items: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 3px 12px var(--pink-glow);
+  }
+  .np-play:hover { transform: scale(1.1); box-shadow: 0 5px 18px var(--pink-glow); }
+
+  .np-progress {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    font-size: 11px;
+    color: var(--text-soft);
+    font-variant-numeric: tabular-nums;
+    font-weight: 600;
+  }
+  .np-bar {
+    flex: 1;
+    height: 5px;
+    background: var(--bg-deeper);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .np-bar-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--pink-soft), var(--pink));
+    width: 28%;
+    border-radius: 3px;
+    transition: background 0.2s;
+  }
+  .np-bar:hover .np-bar-fill { background: linear-gradient(90deg, var(--pink), var(--pink-deep)); }
+
+  .np-right {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+  }
+  .vol-bar {
+    width: 100px;
+    height: 5px;
+    background: var(--bg-deeper);
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+  }
+  .vol-fill {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(90deg, var(--pink-soft), var(--pink));
+    width: 65%;
+    border-radius: 3px;
+  }
+
+  /* ===== Animations ===== */
+  @keyframes gentle-pulse {
+    0%, 100% { box-shadow: 0 6px 24px var(--pink-glow); }
+    50%      { box-shadow: 0 6px 36px rgba(255, 107, 157, 0.45); }
+  }
+  .play-btn { animation: gentle-pulse 3s ease-in-out infinite; }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .hero-info > * { animation: fade-up 0.7s ease-out backwards; }
+  .hero-info > *:nth-child(1) { animation-delay: 0.05s; }
+  .hero-info > *:nth-child(2) { animation-delay: 0.15s; }
+  .hero-info > *:nth-child(3) { animation-delay: 0.25s; }
+  .hero-info > *:nth-child(4) { animation-delay: 0.35s; }
+  .hero-art { animation: fade-up 0.8s ease-out backwards; }
+
+  /* Heart pop animation for likes */
+  @keyframes heart-pop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.45); }
+    100% { transform: scale(1); }
+  }
+  .heart-pop { animation: heart-pop 0.4s ease-out; }
+
+  /* ================================================ */
+  /* ===== NEW CUTE ELEMENTS ===== */
+  /* ================================================ */
+
+  /* sidebar handwritten label */
+  .side-handwriting {
+    font-family: 'Caveat', cursive;
+    font-size: 26px;
+    font-weight: 500;
+    color: var(--text-soft);
+    text-align: center;
+    line-height: 1.1;
+    padding: 28px 20px 8px;
+  }
+  .side-handwriting span {
+    color: var(--pink-deep);
+    font-weight: 700;
+    font-style: italic;
+  }
+
+  /* featured playlist card */
+  .featured-card {
+    margin: 14px 20px 0;
+    padding: 22px 20px 24px;
+    background: linear-gradient(180deg, #ffffff 0%, #fff5f8 100%);
+    border-radius: 24px;
+    border: 1.5px solid var(--pink-soft);
+    box-shadow:
+      0 8px 24px rgba(255, 143, 171, 0.18),
+      inset 0 0 0 4px white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+  }
+  .featured-card::before {
+    content: '✦';
+    position: absolute;
+    top: -8px; left: 18px;
+    color: var(--pink);
+    font-size: 16px;
+    animation: spin-slow 8s linear infinite;
+  }
+  .featured-card::after {
+    content: '✿';
+    position: absolute;
+    bottom: -10px; right: 16px;
+    color: var(--pink-soft);
+    font-size: 18px;
+    animation: spin-slow 12s linear infinite reverse;
+  }
+
+  .featured-cover {
+    width: 150px;
+    height: 150px;
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 28% 22%, #fff5f8 0%, transparent 55%),
+      radial-gradient(circle at 78% 82%, #e94f87 0%, transparent 65%),
+      linear-gradient(135deg, #ffb7c5 0%, #ff6b9d 100%);
+    position: relative;
+    box-shadow: 0 8px 24px rgba(255, 107, 157, 0.35);
+    margin-bottom: 14px;
+    transition: transform 0.4s cubic-bezier(.34,1.56,.64,1);
+    cursor: pointer;
+  }
+  .featured-cover:hover { transform: rotate(-4deg) scale(1.04); }
+
+  .featured-cover .bow {
+    position: absolute;
+    top: -16px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 56px;
+    height: 28px;
+    z-index: 3;
+    filter: drop-shadow(0 3px 6px rgba(233, 79, 135, 0.4));
+  }
+  .featured-cover .bow svg { width: 100%; height: 100%; }
+
+  .featured-letter {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 86px;
+    color: white;
+    line-height: 1;
+    text-shadow: 0 4px 16px rgba(233, 79, 135, 0.5);
+  }
+
+  .float-petal {
+    position: absolute;
+    width: 14px; height: 14px;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23fff'/></svg>");
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0.9;
+    z-index: 2;
+  }
+  .fp1 { top: 20%;  left: 14%;  animation: tiny-float 5s ease-in-out infinite; }
+  .fp2 { top: 72%;  right: 18%; animation: tiny-float 6s ease-in-out 1s infinite; width: 10px; height: 10px; }
+  .fp3 { top: 50%;  right: 12%; animation: tiny-float 7s ease-in-out 2s infinite; width: 11px; height: 11px; }
+
+  .featured-title {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 34px;
+    line-height: 1;
+    color: var(--text);
+    background: linear-gradient(135deg, var(--text) 0%, var(--pink-deep) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    margin-bottom: 6px;
+  }
+  .featured-meta {
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--text-soft);
+    margin-bottom: 12px;
+  }
+  .featured-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 20px;
+    color: var(--pink-deep);
+    font-weight: 600;
+    padding: 4px 14px;
+    background: var(--bg-hover);
+    border-radius: 999px;
+    border: 1.5px dashed var(--pink-soft);
+  }
+
+  .side-sparkles {
+    margin-top: auto;
+    padding: 20px 0 24px;
+    text-align: center;
+    color: var(--pink-soft);
+    font-size: 16px;
+    letter-spacing: 0.1em;
+    animation: twinkle 4s ease-in-out infinite;
+  }
+
+  /* hero bow + note */
+  .hero-bow {
+    position: absolute;
+    top: -18px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90px;
+    height: 45px;
+    z-index: 5;
+    filter: drop-shadow(0 4px 8px rgba(233, 79, 135, 0.4));
+    animation: bow-wiggle 4s ease-in-out infinite;
+  }
+  .hero-bow svg { width: 100%; height: 100%; }
+  @keyframes bow-wiggle {
+    0%, 100% { transform: translateX(-50%) rotate(0deg); }
+    25%      { transform: translateX(-50%) rotate(-4deg); }
+    75%      { transform: translateX(-50%) rotate(4deg); }
+  }
+
+  .hero-note {
+    position: absolute;
+    bottom: 14px;
+    right: 16px;
+    z-index: 3;
+    font-family: 'Caveat', cursive;
+    font-size: 28px;
+    font-weight: 600;
+    color: white;
+    transform: rotate(-8deg);
+    text-shadow: 0 2px 6px rgba(233, 79, 135, 0.5);
+    pointer-events: none;
+  }
+
+  /* hero cover hover wiggle */
+  .hero-art {
+    transition: transform 0.5s cubic-bezier(.34,1.56,.64,1);
+    cursor: pointer;
+  }
+  .hero-art:hover { transform: rotate(-3deg) scale(1.03); }
+
+  /* big heart wiggle */
+  .big-heart {
+    animation: heart-beat 2.2s ease-in-out infinite;
+  }
+  @keyframes heart-beat {
+    0%, 100% { transform: scale(1); }
+    20%      { transform: scale(1.08); }
+    40%      { transform: scale(1); }
+    60%      { transform: scale(1.08); }
+    80%      { transform: scale(1); }
+  }
+
+  /* actions note */
+  .actions-note {
+    margin-left: auto;
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--pink-deep);
+    text-align: right;
+    line-height: 1.1;
+    font-weight: 600;
+    transform: rotate(-2deg);
+  }
+
+  /* player right tag */
+  .np-tag {
+    font-family: 'Caveat', cursive;
+    font-size: 22px;
+    color: var(--pink-deep);
+    font-weight: 600;
+    padding: 6px 14px;
+    background: var(--bg-hover);
+    border-radius: 999px;
+    border: 1.5px dashed var(--pink-soft);
+  }
+
+  /* signature date */
+  .signature-date {
+    margin-top: 8px;
+    font-family: 'Caveat', cursive;
+    font-style: normal;
+    font-size: 20px;
+    color: var(--pink);
+  }
+
+  /* floating click hearts */
+  .float-heart {
+    position: fixed;
+    pointer-events: none;
+    color: var(--pink);
+    font-size: 22px;
+    z-index: 9999;
+    animation: heart-float 0.9s ease-out forwards;
+    text-shadow: 0 2px 6px var(--pink-glow);
+  }
+  @keyframes heart-float {
+    0%   { transform: translate(-50%, 0) scale(0.6); opacity: 1; }
+    30%  { transform: translate(-50%, -20px) scale(1.3); opacity: 1; }
+    100% { transform: translate(-50%, -90px) scale(0.9); opacity: 0; }
+  }
+
+  /* even more rounded everywhere */
+  .sidebar, .main, .player { border-radius: 26px; }
+
+  /* chapter dividers in track list */
+  .phase-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 28px 18px 14px;
+    margin-top: 6px;
+    color: var(--pink-deep);
+    position: relative;
+  }
+  .phase-divider:first-child { padding-top: 14px; }
+  .phase-divider::before,
+  .phase-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--pink-soft) 30%, var(--pink-soft) 70%, transparent);
+  }
+  .phase-num {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: var(--text-soft);
+    letter-spacing: 0.02em;
+  }
+  .phase-sep { color: var(--pink-soft); }
+  .phase-title {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--pink-deep);
+  }
+  .phase-orn {
+    font-size: 14px;
+    color: var(--pink);
+    animation: spin-slow 10s linear infinite;
+    display: inline-block;
+  }
+  .phase-orn:last-of-type { animation-direction: reverse; }
+
+  @media (max-width: 900px) {
+    .phase-num { display: none; }
+    .phase-sep { display: none; }
+    .phase-title { font-size: 18px; }
+  }
+  @media (max-width: 900px) {
+    .app { grid-template-columns: 100px 1fr; }
+    .side-handwriting { font-size: 16px; padding: 18px 8px 6px; }
+    .featured-card { margin: 8px; padding: 10px 8px; }
+    .featured-cover { width: 70px; height: 70px; border-radius: 14px; }
+    .featured-letter { font-size: 42px; }
+    .featured-cover .bow { width: 36px; height: 18px; top: -8px; }
+    .featured-title { font-size: 18px; }
+    .featured-meta, .featured-tag, .side-sparkles { display: none; }
+    .float-petal { display: none; }
+    .tracks-head, .track { grid-template-columns: 36px 1fr 80px; }
+    .tracks-head .album, .tracks-head .added,
+    .t-album, .t-added { display: none; }
+    .hero { flex-direction: column; align-items: flex-start; padding-top: 36px; }
+    .hero-art { width: 180px; height: 180px; border-radius: 20px; }
+    .hero-art::after { font-size: 72px; }
+    .hero-bow { width: 70px; height: 36px; top: -14px; }
+    .actions-note { font-size: 16px; }
+    .np-tag { font-size: 16px; padding: 4px 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ✿ falling petals ✿ -->
+<div class="petal-layer" id="petalLayer"></div>
+
+<!-- background twinkles -->
+<div class="sparkle-layer" id="sparkleLayer"></div>
+
+<div class="app">
+
+  <!-- =================== SIDEBAR =================== -->
+  <aside class="sidebar">
+    <div class="side-handwriting">
+      currently<br>
+      <span>obsessed</span> with...
+    </div>
+
+    <div class="featured-card">
+      <div class="featured-cover">
+        <div class="bow">
+          <svg viewBox="0 0 60 30" xmlns="http://www.w3.org/2000/svg">
+            <path d="M30 15 Q 18 4, 8 8 Q 2 15, 8 22 Q 18 26, 30 15 Z" fill="#ff6b9d" stroke="#e94f87" stroke-width="0.8"/>
+            <path d="M30 15 Q 42 4, 52 8 Q 58 15, 52 22 Q 42 26, 30 15 Z" fill="#ff6b9d" stroke="#e94f87" stroke-width="0.8"/>
+            <ellipse cx="30" cy="15" rx="4" ry="5" fill="#e94f87"/>
+            <path d="M30 19 L 26 28 M 30 19 L 34 28" stroke="#e94f87" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <span class="featured-letter">i</span>
+        <span class="float-petal fp1"></span>
+        <span class="float-petal fp2"></span>
+        <span class="float-petal fp3"></span>
+      </div>
+      <div class="featured-title">isha.</div>
+      <div class="featured-meta">13 songs · ~1 hr</div>
+      <div class="featured-tag">♡ on repeat</div>
+    </div>
+
+    <div class="side-sparkles">
+      ⋆ ˚ ｡⋆୨ ୧˚ ⋆
+    </div>
+  </aside>
+
+  <!-- =================== MAIN =================== -->
+  <main class="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-art">
+        <div class="hero-bow">
+          <svg viewBox="0 0 80 40" xmlns="http://www.w3.org/2000/svg">
+            <path d="M40 20 Q 22 4, 8 8 Q 0 20, 8 32 Q 22 36, 40 20 Z" fill="#ff6b9d" stroke="#fff" stroke-width="1.2"/>
+            <path d="M40 20 Q 58 4, 72 8 Q 80 20, 72 32 Q 58 36, 40 20 Z" fill="#ff6b9d" stroke="#fff" stroke-width="1.2"/>
+            <ellipse cx="40" cy="20" rx="5" ry="7" fill="#e94f87" stroke="#fff" stroke-width="1.2"/>
+            <path d="M40 26 L 34 38 M 40 26 L 46 38" stroke="#e94f87" stroke-width="3" stroke-linecap="round" fill="none"/>
+          </svg>
+        </div>
+        <div class="hero-art-petals">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div class="hero-note">♡ 4 u</div>
+      </div>
+      <div class="hero-info">
+        <div class="hero-label">Playlist</div>
+        <h1 class="hero-title">isha.</h1>
+        <p class="hero-desc">a love story told the slow way — how she walked into the room, how slowly I fell, how strong she grew, and how, somehow, we ended up here together. thirteen songs, four chapters.</p>
+        <div class="hero-meta">
+          <span class="by">j.</span>
+          <span class="dot">•</span>
+          <span>13 songs,</span>
+          <span class="muted">about an hour</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ACTIONS -->
+    <section class="actions">
+      <button class="play-btn" id="playBtn" title="Play">
+        <svg id="playIcon" width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="icon-btn liked big-heart" title="Liked">
+        <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8C19 16.5 12 21 12 21z"/></svg>
+      </button>
+      <div class="actions-note">
+        a love letter <br>in fourteen tracks ♡
+      </div>
+    </section>
+
+    <!-- TRACK LIST -->
+    <section class="tracks">
+      <div class="tracks-head">
+        <div class="num">#</div>
+        <div>Title</div>
+        <div class="album">Album</div>
+        <div class="added">Date added</div>
+        <div class="dur">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>
+        </div>
+      </div>
+
+      <div id="trackList"></div>
+    </section>
+
+    <div class="signature">
+      made with too much care, for <span>isha</span>
+      <div class="signature-date">— on a quiet sunday ♡</div>
+    </div>
+
+  </main>
+
+  <!-- =================== PLAYER =================== -->
+  <footer class="player">
+    <div class="np-left">
+      <div class="np-cover cv-1"></div>
+      <div class="np-meta">
+        <div class="np-title" id="npTitle">Anjaana Anjaani (Title Song)</div>
+        <div class="np-artist" id="npArtist">Nikhil D'Souza & Monali Thakur</div>
+      </div>
+      <button class="np-like" title="In Liked Songs">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8C19 16.5 12 21 12 21z"/></svg>
+      </button>
+    </div>
+
+    <div class="np-center">
+      <div class="np-controls">
+        <button class="np-btn" title="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6 8.5 6V6z"/></svg>
+        </button>
+        <button class="np-play" id="npPlay" title="Play">
+          <svg id="npPlayIcon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </button>
+        <button class="np-btn" title="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM6 18l8.5-6L6 6z"/></svg>
+        </button>
+      </div>
+      <div class="np-progress">
+        <span id="npElapsed">0:43</span>
+        <div class="np-bar" id="npBar">
+          <div class="np-bar-fill" id="npFill"></div>
+        </div>
+        <span id="npTotal">5:32</span>
+      </div>
+    </div>
+
+    <div class="np-right">
+      <span class="np-tag">made with ♡</span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // ============ THE PLAYLIST — a love story in four chapters ============
+  const tracks = [
+    // ── chapter one: when she walked in ──
+    { title: "Anjaana Anjaani (Title Song)", artist: "Nikhil D'Souza & Monali Thakur", album: "Anjaana Anjaani",       added: "1 year ago",    dur: "5:32", cv: 1,  liked: true, phase: 0 },
+    { title: "Raabta (Kehte Hain Khuda)",    artist: "Arijit Singh & Hamsika Iyer",    album: "Agent Vinod",           added: "11 months ago", dur: "4:24", cv: 2,  liked: true, phase: 0 },
+    { title: "Pehla Nasha",                  artist: "Udit Narayan & Sadhana Sargam",  album: "Jo Jeeta Wohi Sikandar",added: "10 months ago", dur: "4:52", cv: 3,  liked: true, phase: 0 },
+
+    // ── chapter two: falling, slowly ──
+    { title: "Nazm Nazm",                    artist: "Arko",                            album: "Bareilly Ki Barfi",     added: "9 months ago",  dur: "4:33", cv: 4,  liked: true, phase: 1 },
+    { title: "Tumse Hi Tumse",               artist: "Shafqat Amanat Ali & KK",         album: "Anjaana Anjaani",       added: "8 months ago",  dur: "4:30", cv: 5,  liked: true, phase: 1 },
+
+    // ── chapter three: and she rose ──
+    { title: "Unstoppable",                  artist: "Sia",                             album: "This Is Acting",        added: "7 months ago",  dur: "3:38", cv: 6,  liked: true, phase: 2 },
+    { title: "Believer",                     artist: "Imagine Dragons",                 album: "Evolve",                added: "6 months ago",  dur: "3:24", cv: 7,  liked: true, phase: 2 },
+    { title: "Yun Hi Chala Chal",            artist: "Kailash Kher, Hariharan & Udit Narayan", album: "Swades",         added: "5 months ago",  dur: "6:25", cv: 8,  liked: true, phase: 2 },
+    { title: "Manja",                        artist: "Amit Trivedi & Mohan Kanan",      album: "Kai Po Che!",           added: "4 months ago",  dur: "4:42", cv: 9,  liked: true, phase: 2 },
+
+    // ── chapter four: happily, ever after ──
+    { title: "Raataan Lambiyan",             artist: "Jubin Nautiyal & Asees Kaur",    album: "Shershaah",              added: "3 months ago",  dur: "3:50", cv: 10, liked: true, phase: 3 },
+    { title: "Tumhi Ho Bandhu",              artist: "Neeraj Shridhar & Kavita Seth",  album: "Cocktail",               added: "2 months ago",  dur: "4:23", cv: 11, liked: true, phase: 3 },
+    { title: "Janam Janam",                  artist: "Arijit Singh & Antara Mitra",    album: "Dilwale",                added: "1 month ago",   dur: "5:21", cv: 12, liked: true, phase: 3 },
+    { title: "Shubhaarambh",                 artist: "Divya Kumar & Sneha Khanwalkar", album: "Kai Po Che!",            added: "3 weeks ago",   dur: "4:12", cv: 13, liked: true, phase: 3 },
+  ];
+
+  const chapters = [
+    { num: "chapter one",   title: "when she walked in" },
+    { num: "chapter two",   title: "falling, slowly"    },
+    { num: "chapter three", title: "and she rose"       },
+    { num: "chapter four",  title: "happily, ever after"},
+  ];
+
+  // ============ CHERRY BLOSSOM PETALS ============
+  function spawnPetals(count) {
+    const layer = document.getElementById('petalLayer');
+    const variants = ['p1', 'p2', 'p3', 'p4'];
+    for (let i = 0; i < count; i++) {
+      const p = document.createElement('div');
+      const variant = variants[Math.floor(Math.random() * variants.length)];
+      p.className = 'petal ' + variant;
+      const dur     = 10 + Math.random() * 12;          // 10-22s
+      const delay   = -Math.random() * dur;              // start mid-fall so screen is full at load
+      const leftVw  = Math.random() * 100;               // 0-100vw
+      const drift   = (Math.random() * 280 - 140);       // -140 to +140 px horizontal drift
+      const size    = 14 + Math.random() * 18;           // 14-32px
+      const opacity = 0.55 + Math.random() * 0.4;
+      p.style.left              = leftVw + 'vw';
+      p.style.width             = size + 'px';
+      p.style.height            = size + 'px';
+      p.style.animationDuration = dur + 's';
+      p.style.animationDelay    = delay + 's';
+      p.style.setProperty('--drift', drift + 'px');
+      p.style.setProperty('--peak-opacity', opacity);
+      layer.appendChild(p);
+    }
+  }
+  spawnPetals(40);
+
+  // ============ BACKGROUND TWINKLES ============
+  function spawnSparkles(count) {
+    const layer = document.getElementById('sparkleLayer');
+    const chars = ['✦', '✧', '·', '♡'];
+    for (let i = 0; i < count; i++) {
+      const s = document.createElement('span');
+      s.className = 'sparkle';
+      s.textContent = chars[Math.floor(Math.random() * chars.length)];
+      s.style.left = (Math.random() * 100) + 'vw';
+      s.style.top  = (Math.random() * 100) + 'vh';
+      s.style.fontSize = (10 + Math.random() * 14) + 'px';
+      s.style.animationDelay = (Math.random() * 4) + 's';
+      s.style.animationDuration = (3 + Math.random() * 4) + 's';
+      layer.appendChild(s);
+    }
+  }
+  spawnSparkles(18);
+
+  // ============ RENDER TRACKS WITH CHAPTERS ============
+  const list = document.getElementById('trackList');
+  let html = '';
+  let lastPhase = -1;
+  tracks.forEach((t, i) => {
+    if (t.phase !== lastPhase) {
+      const ch = chapters[t.phase];
+      html += `
+        <div class="phase-divider">
+          <span class="phase-orn">✿</span>
+          <span class="phase-num">${ch.num}</span>
+          <span class="phase-sep">·</span>
+          <span class="phase-title">${ch.title}</span>
+          <span class="phase-orn">✿</span>
+        </div>`;
+      lastPhase = t.phase;
+    }
+    html += `
+      <div class="track" data-i="${i}">
+        <div class="t-num">${i + 1}</div>
+        <div class="t-play" style="display:none">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <div class="t-left">
+          <div class="t-cover cv-${t.cv}"></div>
+          <div class="t-meta">
+            <div class="t-title">${t.title}</div>
+            <div class="t-artist">${t.artist}</div>
+          </div>
+        </div>
+        <div class="t-album">${t.album}</div>
+        <div class="t-added">${t.added}</div>
+        <div class="t-right">
+          <button class="t-heart ${t.liked ? 'liked' : ''}" data-i="${i}" title="${t.liked ? 'Remove from liked' : 'Save to liked'}">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="${t.liked ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+              <path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8C19 16.5 12 21 12 21z"/>
+            </svg>
+          </button>
+          <span>${t.dur}</span>
+        </div>
+      </div>`;
+  });
+  list.innerHTML = html;
+
+  // ============ PLAYER INTERACTION ============
+  const playBtn  = document.getElementById('playBtn');
+  const playIcon = document.getElementById('playIcon');
+  const npPlay   = document.getElementById('npPlay');
+  const npPlayIcon = document.getElementById('npPlayIcon');
+  const npTitle  = document.getElementById('npTitle');
+  const npArtist = document.getElementById('npArtist');
+  const npCover  = document.querySelector('.np-cover');
+  const npFill   = document.getElementById('npFill');
+  const npElapsed= document.getElementById('npElapsed');
+  const npTotal  = document.getElementById('npTotal');
+  const npBar    = document.getElementById('npBar');
+
+  let playing = false;
+  let current = 0;
+  let elapsed = 43;
+  let timer;
+
+  const PAUSE_ICON = '<path d="M6 4h4v16H6zM14 4h4v16h-4z"/>';
+  const PLAY_ICON  = '<path d="M8 5v14l11-7z"/>';
+
+  const parseDur = (s) => { const [m, ss] = s.split(':').map(Number); return m * 60 + ss; };
+  const fmt = (s) => `${Math.floor(s/60)}:${String(s%60).padStart(2,'0')}`;
+
+  function loadTrack(i, autoplay = true) {
+    current = i;
+    const t = tracks[i];
+    npTitle.textContent = t.title;
+    npArtist.textContent = t.artist;
+    npCover.className = 'np-cover cv-' + t.cv;
+    npTotal.textContent = t.dur;
+    elapsed = 0;
+    npElapsed.textContent = '0:00';
+    npFill.style.width = '0%';
+
+    document.querySelectorAll('.track').forEach(el => el.classList.remove('playing'));
+    document.querySelector(`.track[data-i="${i}"]`)?.classList.add('playing');
+
+    if (autoplay) setPlaying(true);
+  }
+
+  function setPlaying(p) {
+    playing = p;
+    playIcon.innerHTML = p ? PAUSE_ICON : PLAY_ICON;
+    npPlayIcon.innerHTML = p ? PAUSE_ICON : PLAY_ICON;
+    playBtn.classList.toggle('playing', p);
+    clearInterval(timer);
+    if (p) {
+      timer = setInterval(() => {
+        const total = parseDur(tracks[current].dur);
+        elapsed++;
+        if (elapsed >= total) {
+          const next = (current + 1) % tracks.length;
+          loadTrack(next, true);
+          return;
+        }
+        npElapsed.textContent = fmt(elapsed);
+        npFill.style.width = (elapsed / total * 100) + '%';
+      }, 1000);
+    }
+  }
+
+  playBtn.addEventListener('click', () => setPlaying(!playing));
+  npPlay.addEventListener('click', () => setPlaying(!playing));
+
+  document.querySelectorAll('.track').forEach(el => {
+    el.addEventListener('click', (e) => {
+      if (e.target.closest('.t-heart')) return;
+      const i = parseInt(el.dataset.i, 10);
+      if (i === current) setPlaying(!playing);
+      else loadTrack(i, true);
+    });
+  });
+
+  document.querySelectorAll('.t-heart').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const i = parseInt(btn.dataset.i, 10);
+      tracks[i].liked = !tracks[i].liked;
+      btn.classList.toggle('liked', tracks[i].liked);
+      btn.querySelector('svg').setAttribute('fill', tracks[i].liked ? 'currentColor' : 'none');
+      // pop animation
+      btn.classList.remove('heart-pop');
+      void btn.offsetWidth; // reflow
+      btn.classList.add('heart-pop');
+      // float-up heart if liking
+      if (tracks[i].liked) spawnFloatHeart(e.clientX, e.clientY);
+    });
+  });
+
+  // ============ FLOATING CLICK HEARTS ============
+  function spawnFloatHeart(x, y) {
+    const symbols = ['♡', '♥', '✿', '✦'];
+    const h = document.createElement('div');
+    h.className = 'float-heart';
+    h.textContent = symbols[Math.floor(Math.random() * symbols.length)];
+    h.style.left = x + 'px';
+    h.style.top  = y + 'px';
+    document.body.appendChild(h);
+    setTimeout(() => h.remove(), 900);
+  }
+
+  // Also pop a heart when you hit the big play button
+  document.getElementById('playBtn').addEventListener('click', (e) => {
+    spawnFloatHeart(e.clientX, e.clientY);
+  });
+
+  // And one for the featured sidebar cover too
+  document.querySelector('.featured-cover')?.addEventListener('click', (e) => {
+    spawnFloatHeart(e.clientX, e.clientY);
+  });
+
+  npBar.addEventListener('click', (e) => {
+    const rect = npBar.getBoundingClientRect();
+    const pct = (e.clientX - rect.left) / rect.width;
+    const total = parseDur(tracks[current].dur);
+    elapsed = Math.floor(total * pct);
+    npElapsed.textContent = fmt(elapsed);
+    npFill.style.width = (pct * 100) + '%';
+  });
+
+  // Initial state
+  document.querySelector(`.track[data-i="0"]`)?.classList.add('playing');
+  npFill.style.width = (43 / parseDur(tracks[0].dur) * 100) + '%';
+</script>
+
+</body>
+</html>
