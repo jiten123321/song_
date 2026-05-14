@@ -1142,6 +1142,23 @@
   }
   .phase-orn:last-of-type { animation-direction: reverse; }
 
+  .phase-desc {
+    font-family: 'Instrument Serif', serif;
+    font-style: italic;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--text-soft);
+    text-align: center;
+    max-width: 560px;
+    margin: -4px auto 14px;
+    padding: 0 22px;
+    font-weight: 400;
+    opacity: 0.88;
+  }
+  @media (max-width: 640px) {
+    .phase-desc { font-size: 13.5px; margin: 0 auto 10px; padding: 0 14px; line-height: 1.5; }
+  }
+
   /* =================== TABLET =================== */
   @media (max-width: 900px) {
     .app {
@@ -2025,7 +2042,7 @@
         <span class="float-petal fp3"></span>
       </div>
       <div class="featured-title">isha.</div>
-      <div class="featured-meta">15 songs · ~1 hr 10 min</div>
+      <div class="featured-meta">14 songs · ~1 hr 5 min</div>
       <div class="featured-tag">♡ on repeat</div>
     </div>
 
@@ -2056,12 +2073,12 @@
       <div class="hero-info">
         <div class="hero-label">Playlist</div>
         <h1 class="hero-title">isha.</h1>
-        <p class="hero-desc">a love story told the slow way — how she walked into the room, how slowly I fell, how strong she grew, how somehow we ended up here together, and how, one quiet night, life brought her back. fifteen songs, six chapters.</p>
+        <p class="hero-desc">a love story told the slow way — how she walked in, how the moon felt close the night I really saw her, how slowly I fell, how strong she grew, and how, somehow, we ended up here together. fourteen songs, five chapters.</p>
         <div class="hero-meta">
           <span class="by">j.</span>
           <span class="dot">•</span>
-          <span>15 songs,</span>
-          <span class="muted">about an hour and ten</span>
+          <span>14 songs,</span>
+          <span class="muted">a little over an hour</span>
         </div>
       </div>
     </section>
@@ -2075,7 +2092,7 @@
         <svg width="38" height="38" viewBox="0 0 24 24" fill="currentColor"><path d="M12 21s-7-4.5-9.5-9C.5 8 3 4 7 4c2 0 3.5 1 5 3 1.5-2 3-3 5-3 4 0 6.5 4 4.5 8C19 16.5 12 21 12 21z"/></svg>
       </button>
       <div class="actions-note">
-        a love letter <br>in fifteen tracks ♡
+        a love letter <br>in fourteen tracks ♡
       </div>
     </section>
 
@@ -2154,39 +2171,38 @@
     // ── chapter one: when she walked in ──
     { title: "Anjaana Anjaani (Title Song)", artist: "Nikhil D'Souza & Monali Thakur", album: "Anjaana Anjaani",       added: "1 year ago",    dur: "5:32", cv: 1,  liked: true, phase: 0, src: SONG_BASE + "Anjaana%20Anjaani%20Ki%20Kahani%20Vishal%20Shekhar%20128%20Kbps.mp3" },
     { title: "Raabta (Kehte Hain Khuda)",    artist: "Arijit Singh & Hamsika Iyer",    album: "Agent Vinod",           added: "11 months ago", dur: "4:24", cv: 2,  liked: true, phase: 0, src: SONG_BASE + "Raabta%20Kehte%20Hain%20Khuda%20Ne%20Agent%20Vinod%20128%20Kbps.mp3" },
-    { title: "Pehla Nasha",                  artist: "Udit Narayan & Sadhana Sargam",  album: "Jo Jeeta Wohi Sikandar",added: "10 months ago", dur: "4:52", cv: 3,  liked: true, phase: 1, src: SONG_BASE + "Pehla%20Nasha%20Jo%20Jeeta%20Wohi%20Sikandar%20128%20Kbps.mp3" },
 
-    // ── chapter two: falling, slowly ──
-    { title: "Nazm Nazm",                    artist: "Arko",                            album: "Bareilly Ki Barfi",     added: "9 months ago",  dur: "4:33", cv: 4,  liked: true, phase: 1, src: SONG_BASE + "Nazm%20Nazm%20Bareilly%20Ki%20Barfi%20128%20Kbps.mp3" },
-    { title: "Tumse Hi Tumse",               artist: "Shafqat Amanat Ali & KK",         album: "Anjaana Anjaani",       added: "8 months ago",  dur: "4:30", cv: 5,  liked: true, phase: 1, src: SONG_BASE + "Tumse%20Hi%20Tumse%20Ab%20Se%20Koi%20Khushi%20Nahi%20V1%20Anjaana%20Anjaani%20128%20Kbps.mp3" },
+    // ── chapter two: when I saw her face for the first time ──
+    { title: "Dekheya Main Chand Dekheya",   artist: "—",                              album: "—",                      added: "10 months ago", dur: "4:30", cv: 15, liked: true, phase: 1, src: SONG_BASE + "Dekheya%20Main%20Chand%20Dekheya%20128%20Kbps.mp3" },
 
-    // ── chapter three: and she rose ──
-    { title: "Unstoppable",                  artist: "Sia",                             album: "This Is Acting",        added: "7 months ago",  dur: "3:38", cv: 6,  liked: true, phase: 2, src: SONG_BASE + "Unstoppable%20Sia%20128%20Kbps.mp3" },
-    { title: "Believer",                     artist: "Imagine Dragons",                 album: "Evolve",                added: "6 months ago",  dur: "3:24", cv: 7,  liked: true, phase: 2, src: SONG_BASE + "Imagine-Dragons-Believer-(LoadedTracks.com).mp3" },
-    { title: "Yun Hi Chala Chal",            artist: "Kailash Kher, Hariharan & Udit Narayan", album: "Swades",         added: "5 months ago",  dur: "6:25", cv: 8,  liked: true, phase: 2, src: SONG_BASE + "Yun%20Hi%20Chala%20Chal%20Swades%20128%20Kbps.mp3" },
-    { title: "Manja",                        artist: "Amit Trivedi & Mohan Kanan",      album: "Kai Po Che!",           added: "4 months ago",  dur: "4:42", cv: 9,  liked: true, phase: 2, src: SONG_BASE + "Manja%20Kai%20Po%20Che%20128%20Kbps.mp3" },
+    // ── chapter three: falling, slowly ──
+    { title: "Pehla Nasha",                  artist: "Udit Narayan & Sadhana Sargam",  album: "Jo Jeeta Wohi Sikandar",added: "9 months ago",  dur: "4:52", cv: 3,  liked: true, phase: 2, src: SONG_BASE + "Pehla%20Nasha%20Jo%20Jeeta%20Wohi%20Sikandar%20128%20Kbps.mp3" },
+    { title: "Nazm Nazm",                    artist: "Arko",                            album: "Bareilly Ki Barfi",     added: "8 months ago",  dur: "4:33", cv: 4,  liked: true, phase: 2, src: SONG_BASE + "Nazm%20Nazm%20Bareilly%20Ki%20Barfi%20128%20Kbps.mp3" },
+    { title: "Tumse Hi Tumse",               artist: "Shafqat Amanat Ali & KK",         album: "Anjaana Anjaani",       added: "7 months ago",  dur: "4:30", cv: 5,  liked: true, phase: 2, src: SONG_BASE + "Tumse%20Hi%20Tumse%20Ab%20Se%20Koi%20Khushi%20Nahi%20V1%20Anjaana%20Anjaani%20128%20Kbps.mp3" },
 
-    // ── chapter four: happily, ever after ──
-    { title: "Raataan Lambiyan",             artist: "Jubin Nautiyal & Asees Kaur",    album: "Shershaah",              added: "3 months ago",  dur: "3:50", cv: 10, liked: true, phase: 3, src: SONG_BASE + "Raataan%20Lambiyan%20Shershaah%20128%20Kbps.mp3" },
-    { title: "Tumhi Ho Bandhu",              artist: "Neeraj Shridhar & Kavita Seth",  album: "Cocktail",               added: "2 months ago",  dur: "4:23", cv: 11, liked: true, phase: 3, src: SONG_BASE + "Tum%20Hi%20Ho%20Bandhu%20Cocktail%20128%20Kbps.mp3" },
-    { title: "Janam Janam",                  artist: "Arijit Singh & Antara Mitra",    album: "Dilwale",                added: "1 month ago",   dur: "5:21", cv: 12, liked: true, phase: 3, src: SONG_BASE + "Janam%20Janam%20Dilwale%20128%20Kbps.mp3" },
-    { title: "Shubhaarambh",                 artist: "Divya Kumar & Sneha Khanwalkar", album: "Kai Po Che!",            added: "3 weeks ago",   dur: "4:12", cv: 13, liked: true, phase: 3, src: SONG_BASE + "Shubhaarambh%20Kai%20Po%20Che%20128%20Kbps.mp3" },
+    // ── chapter four: and she rose ──
+    { title: "Unstoppable",                  artist: "Sia",                             album: "This Is Acting",        added: "6 months ago",  dur: "3:38", cv: 6,  liked: true, phase: 3, src: SONG_BASE + "Unstoppable%20Sia%20128%20Kbps.mp3" },
+    { title: "Believer",                     artist: "Imagine Dragons",                 album: "Evolve",                added: "5 months ago",  dur: "3:24", cv: 7,  liked: true, phase: 3, src: SONG_BASE + "Imagine-Dragons-Believer-(LoadedTracks.com).mp3" },
+    { title: "Yun Hi Chala Chal",            artist: "Kailash Kher, Hariharan & Udit Narayan", album: "Swades",         added: "4 months ago",  dur: "6:25", cv: 8,  liked: true, phase: 3, src: SONG_BASE + "Yun%20Hi%20Chala%20Chal%20Swades%20128%20Kbps.mp3" },
+    { title: "Manja",                        artist: "Amit Trivedi & Mohan Kanan",      album: "Kai Po Che!",           added: "3 months ago",  dur: "4:42", cv: 9,  liked: true, phase: 3, src: SONG_BASE + "Manja%20Kai%20Po%20Che%20128%20Kbps.mp3" },
 
-    // ── chapter five: when I saw her face for the first time ──
-    { title: "Dekheya Main Chand Dekheya",   artist: "—",                              album: "—",                      added: "2 weeks ago",   dur: "4:30", cv: 15, liked: true, phase: 4, src: SONG_BASE + "Dekheya%20Main%20Chand%20Dekheya%20128%20Kbps.mp3" },
-
-    // ── chapter six: when life brought you back again ──
-    { title: "Lo Safar",                     artist: "Jubin Nautiyal",                 album: "Baaghi 2",               added: "1 week ago",    dur: "4:18", cv: 16, liked: true, phase: 5, src: SONG_BASE + "Lo%20Safar%20Baaghi%202%20128%20Kbps.mp3" },
+    // ── chapter five: happily, ever after ──
+    { title: "Raataan Lambiyan",             artist: "Jubin Nautiyal & Asees Kaur",    album: "Shershaah",              added: "2 months ago",  dur: "3:50", cv: 10, liked: true, phase: 4, src: SONG_BASE + "Raataan%20Lambiyan%20Shershaah%20128%20Kbps.mp3" },
+    { title: "Tumhi Ho Bandhu",              artist: "Neeraj Shridhar & Kavita Seth",  album: "Cocktail",               added: "1 month ago",   dur: "4:23", cv: 11, liked: true, phase: 4, src: SONG_BASE + "Tum%20Hi%20Ho%20Bandhu%20Cocktail%20128%20Kbps.mp3" },
+    { title: "Janam Janam",                  artist: "Arijit Singh & Antara Mitra",    album: "Dilwale",                added: "3 weeks ago",   dur: "5:21", cv: 12, liked: true, phase: 4, src: SONG_BASE + "Janam%20Janam%20Dilwale%20128%20Kbps.mp3" },
+    { title: "Shubhaarambh",                 artist: "Divya Kumar & Sneha Khanwalkar", album: "Kai Po Che!",            added: "2 weeks ago",   dur: "4:12", cv: 13, liked: true, phase: 4, src: SONG_BASE + "Shubhaarambh%20Kai%20Po%20Che%20128%20Kbps.mp3" },
   ];
 
   const chapters = [
-    { num: "chapter one",   title: "when she walked in" },
-    { num: "chapter two",   title: "falling, slowly"    },
-    { num: "chapter three", title: "and she rose"       },
-    { num: "chapter four",  title: "happily, ever after"},
     {
-      num: "chapter five",
+      num: "chapter one",
+      title: "when she walked in",
+      desc: "the very first day — when you stepped into my world without trying, and quietly, everything shifted.",
+    },
+    {
+      num: "chapter two",
       title: "when I saw her face for the first time",
+      desc: "the night the world paused for a heartbeat — and 'breathtaking' finally had a meaning.",
       scene: {
         theme: "moonlit",
         lines: [
@@ -2204,25 +2220,19 @@
       },
     },
     {
-      num: "chapter six",
-      title: "when life brought you back again",
-      scene: {
-        theme: "sunrise",
-        lines: [
-          "And somehow…",
-          "life crossed our paths again.",
-          "",
-          "After all the distance, silence, confusion,",
-          "and unfinished feelings…",
-          "you returned like warmth after a long winter.",
-          "",
-          "Maybe destiny was just waiting",
-          "for the right chapter.",
-          "",
-          "And suddenly…",
-          "the journey didn't feel lonely anymore.",
-        ],
-      },
+      num: "chapter three",
+      title: "falling, slowly",
+      desc: "day by day, song by song — a slow becoming, the kind that feels safer than gravity.",
+    },
+    {
+      num: "chapter four",
+      title: "and she rose",
+      desc: "watching her bloom — quietly, fiercely, beautifully — on her own terms.",
+    },
+    {
+      num: "chapter five",
+      title: "happily, ever after",
+      desc: "and then, somehow, the story chose us — together, calm, and finally home.",
     },
   ];
 
@@ -2285,6 +2295,9 @@
           <span class="phase-title">${ch.title}</span>
           <span class="phase-orn">✿</span>
         </div>`;
+      if (ch.desc) {
+        html += `<p class="phase-desc">${ch.desc}</p>`;
+      }
       if (ch.scene) {
         const sceneLines = ch.scene.lines
           .map(line => line === '' ? '<p>&nbsp;</p>' : `<p>${line}</p>`)
