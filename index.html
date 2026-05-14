@@ -2083,7 +2083,19 @@
   const [prevBtn, nextBtn] = document.querySelectorAll('.np-controls .np-btn');
 
   const audio = new Audio();
-  audio.preload = 'metadata';
+  audio.preload = 'auto';
+  // Hidden audio element used purely to warm the HTTP cache for the next
+  // track in the playlist, so when the current one ends — or the user hits
+  // "next" — the file is already buffered.
+  const prefetcher = new Audio();
+  prefetcher.preload = 'auto';
+  let prefetchedIndex = -1;
+  function prefetchNext() {
+    const next = (current + 1) % tracks.length;
+    if (next === prefetchedIndex) return;
+    prefetchedIndex = next;
+    prefetcher.src = tracks[next].src;
+  }
 
   let playing = false;
   let current = 0;
@@ -2160,8 +2172,21 @@
   audio.addEventListener('ended', () => {
     loadTrack(current + 1, true);
   });
-  audio.addEventListener('play',  () => { playing = true;  updatePlayIcons(); });
-  audio.addEventListener('pause', () => { playing = false; updatePlayIcons(); });
+  audio.addEventListener('play',    () => { playing = true;  updatePlayIcons(); });
+  audio.addEventListener('pause',   () => { playing = false; updatePlayIcons(); });
+  // Once the current song actually starts, warm the cache for the next one.
+  audio.addEventListener('playing', prefetchNext);
+  // If the prefetcher's request fails (e.g. jsDelivr blocked), fall back so
+  // the main player gets the raw.github URL when it switches.
+  prefetcher.addEventListener('error', () => {
+    if (prefetcher.src.startsWith(SONG_BASE)) {
+      const t = tracks[prefetchedIndex];
+      if (!t) return;
+      const altSrc = t.src.replace(SONG_BASE, SONG_BASE_FALLBACK);
+      t.src = altSrc;
+      prefetcher.src = altSrc;
+    }
+  });
   audio.addEventListener('error', () => {
     const t = tracks[current];
     if (!t) return;
@@ -2308,6 +2333,10 @@
   welcomeBtn?.addEventListener('click', (e) => {
     welcome.classList.add('closing');
     spawnFloatHeart(e.clientX, e.clientY);
+    // The click is a user gesture — use it to kick off real buffering so the
+    // first song is ready to stream the instant they hit play.
+    try { audio.load(); } catch (_) {}
+    prefetchNext();
     setTimeout(() => welcome.classList.add('hidden'), 650);
   });
 </script>
