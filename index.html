@@ -1942,9 +1942,14 @@
 
 </div>
 
-<script>
+<script data-cfasync="false">
   // ============ THE PLAYLIST — a love story in four chapters ============
-  const SONG_BASE = 'https://raw.githubusercontent.com/jiten123321/song/main/';
+  // Primary CDN (jsDelivr proxies the same GitHub repo, but is built for
+  // hotlinking and doesn't ship a Content-Disposition: attachment header,
+  // which some mobile browsers refuse to stream).
+  const SONG_BASE          = 'https://cdn.jsdelivr.net/gh/jiten123321/song@main/';
+  // Fallback if jsDelivr is blocked / rate-limited.
+  const SONG_BASE_FALLBACK = 'https://raw.githubusercontent.com/jiten123321/song/main/';
   const tracks = [
     // ── chapter one: when she walked in ──
     { title: "Anjaana Anjaani (Title Song)", artist: "Nikhil D'Souza & Monali Thakur", album: "Anjaana Anjaani",       added: "1 year ago",    dur: "5:32", cv: 1,  liked: true, phase: 0, src: SONG_BASE + "Anjaana%20Anjaani%20Ki%20Kahani%20Vishal%20Shekhar%20128%20Kbps.mp3" },
@@ -2158,7 +2163,19 @@
   audio.addEventListener('play',  () => { playing = true;  updatePlayIcons(); });
   audio.addEventListener('pause', () => { playing = false; updatePlayIcons(); });
   audio.addEventListener('error', () => {
-    console.warn('audio error for', tracks[current]?.title, audio.error);
+    const t = tracks[current];
+    if (!t) return;
+    // If jsDelivr failed, transparently retry from the GitHub raw mirror.
+    if (t.src.startsWith(SONG_BASE)) {
+      const altSrc = t.src.replace(SONG_BASE, SONG_BASE_FALLBACK);
+      console.warn('jsDelivr failed for', t.title, '— falling back to raw.github');
+      t.src = altSrc;
+      const wasPlaying = playing;
+      audio.src = altSrc;
+      if (wasPlaying) setPlaying(true);
+    } else {
+      console.warn('audio error for', t.title, audio.error);
+    }
   });
 
   playBtn.addEventListener('click', () => setPlaying(!playing));
