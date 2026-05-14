@@ -54,30 +54,32 @@
     z-index: 1000;
     overflow: hidden;
   }
+  /* Snowflakes drifting down — soft glowing dots (formerly cherry-blossom petals) */
   .petal {
     position: absolute;
     top: -40px;
     pointer-events: none;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+    border-radius: 50%;
+    background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.55) 45%, transparent 78%);
+    box-shadow: 0 0 5px rgba(255,255,255,0.7), 0 0 12px rgba(220,235,255,0.45);
     will-change: transform;
     animation-name: petal-fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    filter: drop-shadow(0 2px 4px rgba(255, 143, 171, 0.2));
+    filter: drop-shadow(0 1px 3px rgba(180, 200, 230, 0.25));
   }
-  .petal.p1 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffd6e0'/><circle cx='12' cy='14' r='1.5' fill='%23ff8fab' opacity='0.4'/></svg>"); }
-  .petal.p2 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffb7c5'/><circle cx='12' cy='14' r='1.5' fill='%23ff6b9d' opacity='0.45'/></svg>"); }
-  .petal.p3 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ff8fab'/><circle cx='12' cy='14' r='1.5' fill='%23e94f87' opacity='0.5'/></svg>"); }
-  .petal.p4 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 16 6, 19 11, 17 17 C 15 21, 12 21, 12 21 C 12 21, 9 21, 7 17 C 5 11, 8 6, 12 2 Z' fill='%23ffe4ec'/></svg>"); }
+  .petal.p1 { background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.65) 45%, transparent 76%); }
+  .petal.p2 { background: radial-gradient(circle, #ffffff 0%, rgba(220,235,255,0.65) 45%, transparent 76%); }
+  .petal.p3 { background: radial-gradient(circle, #ffffff 0%, rgba(240,240,255,0.55) 45%, transparent 76%); }
+  .petal.p4 { background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 45%, transparent 76%); }
 
+  /* Snow drifts more gently than petals — no spinning, smaller horizontal sway */
   @keyframes petal-fall {
-    0%   { transform: translate3d(0, -10vh, 0) rotate(0deg);   opacity: 0; }
-    8%   { opacity: var(--peak-opacity, 0.85); }
-    50%  { transform: translate3d(calc(var(--drift, 60px) * 0.5), 50vh, 0) rotate(360deg); }
-    92%  { opacity: var(--peak-opacity, 0.85); }
-    100% { transform: translate3d(var(--drift, 60px), 110vh, 0) rotate(720deg); opacity: 0; }
+    0%   { transform: translate3d(0, -10vh, 0);                                  opacity: 0; }
+    10%  { opacity: var(--peak-opacity, 0.85); }
+    50%  { transform: translate3d(calc(var(--drift, 60px) * 0.55), 50vh, 0); }
+    90%  { opacity: var(--peak-opacity, 0.85); }
+    100% { transform: translate3d(var(--drift, 60px), 110vh, 0);                  opacity: 0; }
   }
 
   /* Sparkles in the background */
@@ -669,8 +671,7 @@
   .cv-12 { background: linear-gradient(135deg, #ffd6df, #f08bb0); }
   .cv-13 { background: linear-gradient(135deg, #ffc8d6, #e85a8a); }
   .cv-14 { background: linear-gradient(135deg, #ffe8ec, #d44a78); }
-  .cv-15 { background: linear-gradient(135deg, #1f2a55, #6b8eb8); } /* moonlit */
-  .cv-16 { background: linear-gradient(135deg, #ffd9a0, #ec5e8a); } /* sunrise */
+  .cv-15 { background: linear-gradient(135deg, #ffe0ee, #c876b0); }
 
   /* ===== SIGNATURE ===== */
   .signature {
