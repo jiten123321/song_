@@ -54,32 +54,32 @@
     z-index: 1000;
     overflow: hidden;
   }
-  /* Snowflakes drifting down — soft glowing dots (formerly cherry-blossom petals) */
+  /* Rose petals drifting down */
   .petal {
     position: absolute;
     top: -40px;
     pointer-events: none;
-    border-radius: 50%;
-    background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.55) 45%, transparent 78%);
-    box-shadow: 0 0 5px rgba(255,255,255,0.7), 0 0 12px rgba(220,235,255,0.45);
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     will-change: transform;
     animation-name: petal-fall;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
-    filter: drop-shadow(0 1px 3px rgba(180, 200, 230, 0.25));
+    filter: drop-shadow(0 2px 4px rgba(200, 60, 100, 0.25));
   }
-  .petal.p1 { background: radial-gradient(circle, #ffffff 0%, rgba(255,255,255,0.65) 45%, transparent 76%); }
-  .petal.p2 { background: radial-gradient(circle, #ffffff 0%, rgba(220,235,255,0.65) 45%, transparent 76%); }
-  .petal.p3 { background: radial-gradient(circle, #ffffff 0%, rgba(240,240,255,0.55) 45%, transparent 76%); }
-  .petal.p4 { background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.4) 45%, transparent 76%); }
+  .petal.p1 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 17 5, 20 11, 18 17 C 16 21, 13 22, 12 22 C 11 22, 8 21, 6 17 C 4 11, 7 5, 12 2 Z' fill='%23ff8fa3'/><path d='M12 4 C 14 9, 14 15, 12 21' stroke='%23d63d6b' stroke-width='0.7' fill='none' opacity='0.4'/></svg>"); }
+  .petal.p2 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 17 5, 20 11, 18 17 C 16 21, 13 22, 12 22 C 11 22, 8 21, 6 17 C 4 11, 7 5, 12 2 Z' fill='%23ffb7c5'/><path d='M12 4 C 14 9, 14 15, 12 21' stroke='%23e94f87' stroke-width='0.7' fill='none' opacity='0.35'/></svg>"); }
+  .petal.p3 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 17 5, 20 11, 18 17 C 16 21, 13 22, 12 22 C 11 22, 8 21, 6 17 C 4 11, 7 5, 12 2 Z' fill='%23e94f87'/><path d='M12 4 C 14 9, 14 15, 12 21' stroke='%23b73c5a' stroke-width='0.7' fill='none' opacity='0.45'/></svg>"); }
+  .petal.p4 { background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'><path d='M12 2 C 17 5, 20 11, 18 17 C 16 21, 13 22, 12 22 C 11 22, 8 21, 6 17 C 4 11, 7 5, 12 2 Z' fill='%23ffd6e0'/></svg>"); }
 
-  /* Snow drifts more gently than petals — no spinning, smaller horizontal sway */
+  /* Petals tumble as they fall — bring rotation back */
   @keyframes petal-fall {
-    0%   { transform: translate3d(0, -10vh, 0);                                  opacity: 0; }
-    10%  { opacity: var(--peak-opacity, 0.85); }
-    50%  { transform: translate3d(calc(var(--drift, 60px) * 0.55), 50vh, 0); }
-    90%  { opacity: var(--peak-opacity, 0.85); }
-    100% { transform: translate3d(var(--drift, 60px), 110vh, 0);                  opacity: 0; }
+    0%   { transform: translate3d(0, -10vh, 0) rotate(0deg);   opacity: 0; }
+    8%   { opacity: var(--peak-opacity, 0.85); }
+    50%  { transform: translate3d(calc(var(--drift, 60px) * 0.5), 50vh, 0) rotate(360deg); }
+    92%  { opacity: var(--peak-opacity, 0.85); }
+    100% { transform: translate3d(var(--drift, 60px), 110vh, 0) rotate(720deg); opacity: 0; }
   }
 
   /* Sparkles in the background */
